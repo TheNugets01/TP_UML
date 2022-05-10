@@ -14,8 +14,6 @@ int main()
     cout << U1->userID << endl;
     cout << U2->userID << endl;
 
-    FILE * file = open("sensor.csv");
-
 
     return 0;
 }
