@@ -1,18 +1,20 @@
 #include <string>
+#include <iostream>
 using namespace std;
 
-class Utilisateur : public Trajet
+class Utilisateur
 {
 
 public:
     
-    Utilisateur (char * unDepart, char * uneArrivee, char * unTransport);
+    Utilisateur (string id, string mdp);
     virtual ~Utilisateur ( );
-
+    
+    int userID;
+    string identifiant;
+    string motDePasse;
 protected:
 
-int userID;
-String identifiant;
-String mdp;
+
 };
 
