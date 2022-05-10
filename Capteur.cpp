@@ -2,7 +2,9 @@
 using namespace std;
 
 
+
 #include "Capteur.h"
+#include "Position.h"
 
 Capteur::Capteur (string ID, Position pos):sensorID(ID),position(pos)
 {} 
@@ -135,4 +137,9 @@ int Capteur::getATMO(string date)
         return maxi(indexO3,indexSO2,indexNO2,indexPM10);
     }
 
+}
+
+Position Capteur::getPosition()
+{
+    return position;
 }
