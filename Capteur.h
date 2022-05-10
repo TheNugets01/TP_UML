@@ -5,10 +5,11 @@
 #include "Mesure.h"
 using namespace std;
 
-#include "Position.h"
 class Capteur
 {
 public:
+
+    Position getPosition();
     
     Capteur (string ID, Position pos);
     virtual ~Capteur ( );

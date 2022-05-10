@@ -5,9 +5,6 @@
 #include "Utilisateur.h"
 #include "Capteur.h"
 
-#include "Utilisateur.h"
-#include "Position.h"
-
 using namespace std;
 
 int main()
