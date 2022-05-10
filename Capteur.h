@@ -1,17 +1,19 @@
 #include <string>
 using namespace std;
 
+#include "Position.h"
 class Capteur
 {
 public:
     
-    Capteur (string ID, int lat, int log);
+    Capteur (string ID, Position p);
     virtual ~Capteur ( );
     double getATMO(string date);
-
+    Position getPosition();
+    
 protected:
 
 string sensorID;
-int Lat;
-int Log;
+Position position;
+
 };
