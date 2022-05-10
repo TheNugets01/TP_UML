@@ -6,7 +6,7 @@ using namespace std;
 #include "Capteur.h"
 #include "Position.h"
 
-Capteur::Capteur (string ID, Position p):sensorID(ID),Position(p)
+Capteur::Capteur (string ID, Position pos):sensorID(ID),position(pos)
 {} 
 
 
