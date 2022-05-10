@@ -21,5 +21,6 @@ int main()
     Position *p2 = new Position(45.776199,4.871971);
     cout << p1->estDansLaZone(*p2,10.0) << endl;
     cout << p1->estDansLaZone(*p2,0.001) << endl;
+
     return 0;
 }
