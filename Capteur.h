@@ -5,10 +5,13 @@ class Capteur
 {
 public:
     
-    Capteur (char * unDepart, char * uneArrivee, char * unTransport);
+    Capteur (string ID, int lat, int log);
     virtual ~Capteur ( );
+    double getATMO(string date);
 
 protected:
 
-int sensorID;
+string sensorID;
+int Lat;
+int Log;
 };
