@@ -1,5 +1,9 @@
 #include <iostream>
 #include <cstring>
+#include <vector>
+
+#include "Utilisateur.h"
+#include "Capteur.h"
 
 #include "Utilisateur.h"
 #include "Position.h"
