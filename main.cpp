@@ -4,9 +4,8 @@
 
 #include "Utilisateur.h"
 #include "Capteur.h"
+#include "Services.h"
 
-#include "Utilisateur.h"
-#include "Position.h"
 
 using namespace std;
 
@@ -21,6 +20,10 @@ int main()
     Position *p2 = new Position(45.776199,4.871971);
     cout << p1->estDansLaZone(*p2,10.0) << endl;
     cout << p1->estDansLaZone(*p2,0.001) << endl;
+
+    Services* service = new Services();
+    service->moyenneQualiteAir(*p1,2.4,"2019-01-02");
+
 
     return 0;
 }

@@ -18,6 +18,11 @@ double Capteur::getATMO(string date)
 
 }
 
+double Capteur::getMoyenneATMO()
+{
+
+}
+
 Position Capteur::getPosition()
 {
     return position;

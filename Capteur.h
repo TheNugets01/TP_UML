@@ -11,6 +11,7 @@ public:
     virtual ~Capteur ( );
     double getATMO(string date);
     Position getPosition();
+    double getMoyenneATMO();
     
 protected:
 

@@ -14,8 +14,8 @@ public:
     Services ();
     virtual ~Services ( );
     double moyenneQualiteAir(Position p, double rayon, string dateDebut, string dateFin);
-    double moyenneQualiteAir(Position p, double rayon, string moment);
-    vector<Capteur> identifierCapteursNonFiables();
+    double moyenneQualiteAir(Position p, double rayon, string jour);
+    vector<Capteur> identifierCapteursNonFiables(string jour);
 
 };
 
