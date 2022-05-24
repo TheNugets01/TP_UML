@@ -4,7 +4,7 @@ using namespace std;
 #define DAY 86400
 
 #include "Capteur.h"
-#include "Position.h"
+
 
 Capteur::Capteur (string ID, Position pos):sensorID(ID),position(pos)
 {} 
