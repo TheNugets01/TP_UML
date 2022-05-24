@@ -32,12 +32,12 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
             moyenne += (*capteur).getATMO(jour);
         }
     }
-    moyenne= moyenne/(nbCapteurs.0);
+    moyenne= moyenne/(nbCapteurs);
     return moyenne;
 }
 
 
-double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
+/*double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
 {
     int nbCapteurs=0;
     double moyPeriode=0;
@@ -58,10 +58,10 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, t
         }
 		moyenne=moyenne+moyPeriode;
     }
-	moyenne=moyenne/nbCapteurs.0;
+	moyenne=moyenne/nbCapteurs;
 	return moyenne;
 
-}
+}*/
 
 vector<Capteur> Services::identifierCapteursNonFiables()
 {
@@ -83,9 +83,10 @@ vector<Capteur> Services::initCapteur(istream& str )
         getline(iss,sensorID,';');
         getline(iss,lat,';');
         getline(iss,lng,';');
-        int latitude = stoi(lat);
-        int longitude = stoi(lng);
-        Capteur capteur(sensorID,latitude,longitude);
+        double latitude = stod(lat);
+        double longitude = stod(lng);
+        Position pos = Position(latitude,longitude);
+        Capteur capteur(sensorID,pos);
         capteurs.push_back(capteur);
 
         cout<< sensorID << lat << lng <<endl;
