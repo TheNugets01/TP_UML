@@ -182,3 +182,7 @@ Position Capteur::getPosition()
 {
     return position;
 }
+
+void Capteur::setMesures(time_t temps, vector<Mesure> listMesure){
+	mesures.insert( make_pair(temps , listMesure) );
+}

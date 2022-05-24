@@ -21,10 +21,11 @@ public:
     int maxi(int, int, int, int);
     int index(double valeur, double palier1, double palier2, double palier3, double palier4, double palier5, double palier6, double palier7, double palier8, double palier9);
     int ajouterMesure(Mesure mesure);
+    void setMesures(time_t temps, vector<Mesure> mesures);
 
-protected:
+    protected:
 
-string sensorID;
-Position position;
-unordered_map<time_t, vector<Mesure>> mesures;
+    string sensorID;
+    Position position;
+    unordered_map<time_t, vector<Mesure> > mesures;
 };
