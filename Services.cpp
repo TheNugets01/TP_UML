@@ -48,19 +48,22 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
     int nbCapteurs=0;
     double moyPeriode=0;
     double moyenne=0;
-    vector<Capteur> listeCapteurs;//RECUPERER LES LISTE DE CAPTEURS INITIALISEE  PARTIR DU CSV
-    for (auto capteur = listeCapteurs.begin(); capteur != listeCapteurs.end(); ++capteur)
+    fstream source;
+    source.open("sensors.csv");
+    vector<Capteur> listeCapteurs=this->initCapteur(source);//RECUPERER LES LISTE DE CAPTEURS INITIALISEE  PARTIR DU CSV
+    for (auto capteur = begin(listeCapteurs); capteur != end(listeCapteurs); ++capteur)
     {
         if((*capteur).getPosition().estDansLaZone(p,rayon))
         {
             nbCapteurs++;
             int nbJours=0;
             //PARCOURS DE LA PERIODE
-			for(time_t time=dateDebut; time<=dateFin; )
+			for(time_t t = dateDebut; t <= dateFin; t += DAY)
 			{
-				moyenne += (*capteur).getATMO(time);
-				moyPeriode=moyPeriode/nbJours;	
-			}			
+                nbJours++;	
+				moyenne += (*capteur).getATMO(t);				
+			}
+            moyPeriode=moyPeriode/nbJours;			
         }
 		moyenne=moyenne+moyPeriode;
     }
