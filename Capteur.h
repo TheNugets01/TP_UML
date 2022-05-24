@@ -23,6 +23,9 @@ public:
     int ajouterMesure(Mesure mesure);
     string getID();
     void setMesures(time_t temps, vector<Mesure> mesures);
+    void setVecteursMesures(Mesure mesure);
+    unordered_map<time_t, vector<Mesure>>& getMesures();
+	friend bool operator==(const Capteur&, const Capteur&);
 
     protected:
 

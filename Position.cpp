@@ -16,6 +16,6 @@ Position::~Position ( )
 bool Position::estDansLaZone(Position centre, double rayon) const
 {
     double dist = pow(latitude - centre.latitude, 2) + pow(longitude - centre.longitude, 2);
-    cout << dist << endl;
+    //cout << dist << endl;
 	return dist <= pow(rayon, 2);
 }

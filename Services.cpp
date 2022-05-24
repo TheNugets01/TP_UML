@@ -3,11 +3,14 @@ using namespace std;
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include <fstream>
 using std::fstream;
 
 #include "Services.h"
+
+#define DAY 86400
 
 
 Services::Services ()
@@ -25,16 +28,22 @@ Services::~Services ( )
 double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 {
     int nbCapteurs=0;
-    double moyenne=0;
+    double moyenne=0.0;
+    
+    fstream cap;
     fstream source;
-    source.open("sensors.csv");
-    vector<Capteur> listeCapteurs=this->initCapteur(source);//RECUPERER LES LISTES DE CAPTEURS INITIALISEE  PARTIR DU CSV
-    for (auto capteur = begin(listeCapteurs); capteur != end(listeCapteurs); ++capteur)
+    cap.open("sensors.csv");
+    source.open("measurements.csv");
+    vector<Capteur> capteurs=initCapteur(cap);
+
+    initMesure(source,capteurs);
+
+    for (auto capteur : capteurs)
     {
-        if((*capteur).getPosition().estDansLaZone(p,rayon))
+        if(capteur.getPosition().estDansLaZone(p,rayon))
         {
             nbCapteurs++;
-            moyenne += (*capteur).getATMO(jour);
+            moyenne += capteur.getATMO(jour);
         }
     }
     moyenne= moyenne/(nbCapteurs);
@@ -43,34 +52,19 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 }
 
 
-/*double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
+double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
 {
-    int nbCapteurs=0;
-    double moyPeriode=0;
-    double moyenne=0;
-    fstream source;
-    source.open("sensors.csv");
-    vector<Capteur> listeCapteurs=this->initCapteur(source);//RECUPERER LES LISTE DE CAPTEURS INITIALISEE  PARTIR DU CSV
-    for (auto capteur = begin(listeCapteurs); capteur != end(listeCapteurs); ++capteur)
-    {
-        if((*capteur).getPosition().estDansLaZone(p,rayon))
-        {
-            nbCapteurs++;
-            int nbJours=0;
-            //PARCOURS DE LA PERIODE
-			for(time_t t = dateDebut; t <= dateFin; t += DAY)
-			{
-                nbJours++;	
-				moyenne += (*capteur).getATMO(t);				
-			}
-            moyPeriode=moyPeriode/nbJours;			
-        }
-		moyenne=moyenne+moyPeriode;
-    }
-	moyenne=moyenne/nbCapteurs;
-	return moyenne;
+    double moyenne=0.0;
+    int nbJours=0;
 
-}*/
+    for(time_t t = dateDebut; t <= dateFin; t += DAY)
+    {
+        nbJours++;	
+        moyenne=moyenne+moyenneQualiteAir(p,rayon,t);				
+    }
+    moyenne=moyenne/nbJours;
+    return moyenne;
+}
 
 /*
 vector<Capteur> Services::identifierCapteursNonFiables()
@@ -98,8 +92,6 @@ vector<Capteur> Services::initCapteur(istream& str )
         Position pos = Position(latitude,longitude);
         Capteur capteur(sensorID,pos);
         capteurs.push_back(capteur);
-
-        cout<< sensorID << lat << lng <<endl;
     }
     return capteurs;
 }
@@ -127,12 +119,8 @@ vector<Attribut> Services::initAttribut(istream& str){
     return attributs;
 }
 
-vector<Mesure> Services::initMesure(istream& str )
+void Services::initMesure(istream& str, vector<Capteur>& capteurs )
 {
-    vector<Mesure> mesures;
-    fstream sourceCap;
-    sourceCap.open("sensors.csv");
-    vector<Capteur> capteurs = initCapteur(sourceCap);
     fstream sourceAtt;
     sourceAtt.open("attributes.csv");
     vector<Attribut> attributs = initAttribut(sourceAtt);
@@ -171,17 +159,12 @@ vector<Mesure> Services::initMesure(istream& str )
         getline(iss,sValeur,';');//Valeur
         double valeur = stod(sValeur);
         
-        Mesure mesure(temps , sensorID , attribut , valeur);
-        mesures.push_back(mesure);
+        const Capteur temp(sensorID, Position(0.0, 0.0));
+        vector<Capteur>::iterator it = find(capteurs.begin(), capteurs.end(), temp);
 
-        for( auto capteur : capteurs  )
-        {
-            if( sensorID.compare( capteur.getID() ) == 0)
-            {
-                capteur.ajouterMesure(mesure);
-            }
-        }
-    }
-
-    return mesures;
+		if (it != capteurs.end())
+		{
+			it->ajouterMesure(Mesure(temps , sensorID , attribut , valeur));
+		}
+    }    
 }
