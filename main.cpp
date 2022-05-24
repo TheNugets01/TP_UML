@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cstring>
 #include <vector>
 #include <time.h>
@@ -36,7 +37,11 @@ int main()
     mktime(tf);
     cout << asctime(tf) << endl;
 
-    //Services* service = new Services();
+    Services* service = new Services();
+    fstream source;
+    source.open("attributes.csv");
+    service->initAttribut(source);
+
     //service->moyenneQualiteAir(*p1,2.4,"2019-01-02");
 
 

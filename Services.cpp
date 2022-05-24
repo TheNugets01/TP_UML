@@ -100,6 +100,29 @@ vector<Capteur> Services::initCapteur(istream& str )
     return capteurs;
 }
 
+vector<Attribut> Services::initAttribut(istream& str){
+    vector<Attribut> attributs;
+    string ligne;
+    string attributID;
+    string unite;
+    string description;
+
+    getline(str,ligne); // Ignorer la première ligne du fichier
+
+     while( getline(str,ligne) )
+    {
+        istringstream iss{ligne};
+        getline(iss,attributID,';');
+        getline(iss,unite,';');
+        getline(iss,description,';');
+
+        Attribut attribut(attributID,unite,description);
+        attributs.push_back(attribut);
+    }
+    
+    return attributs;
+}
+
 vector<Mesure> Services::initMesure(istream& str )
 {
     
@@ -110,6 +133,7 @@ vector<Mesure> Services::initMesure(istream& str )
     string attribut;
     string mesure;
     
+
     while( getline(str,ligne) )
     {
         istringstream iss{ligne};

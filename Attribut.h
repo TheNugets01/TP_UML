@@ -7,7 +7,7 @@ class Attribut
 {
 public:
     
-    Attribut (string u, string desc);
+    Attribut (string id, string u, string desc);
     virtual ~Attribut ( );
     string getID();
 
