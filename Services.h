@@ -3,8 +3,7 @@ using namespace std;
 #include <vector>
 #include <iostream>
 
-#include "Capteur.h"
-#include "Position.h"
+
 
 class Services
 {
