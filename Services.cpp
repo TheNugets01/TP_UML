@@ -18,7 +18,7 @@ Services::~Services ( )
 }
 
 
-double Services::moyenneQualiteAir(Position p, double rayon, string jour)
+double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 {
     int nbCapteurs=0;
     double moyenne=0;
@@ -28,15 +28,15 @@ double Services::moyenneQualiteAir(Position p, double rayon, string jour)
         if((*capteur).getPosition().estDansLaZone(p,rayon))
         {
             nbCapteurs++;
-            moyenne += (*capteur).getATMO(jour);//A CODER : on met que le jour ou quoi ?
+            moyenne += (*capteur).getATMO(jour);
         }
     }
-    moyenne= moyenne/nbCapteurs;
+    moyenne= moyenne/(nbCapteurs.0);
     return moyenne;
 }
 
-/*
-double Services::moyenneQualiteAir(Position p, double rayon, string dateDebut, string dateFin)
+
+double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
 {
     int nbCapteurs=0;
     double moyPeriode=0;
@@ -48,26 +48,17 @@ double Services::moyenneQualiteAir(Position p, double rayon, string dateDebut, s
         {
             nbCapteurs++;
             int nbJours=0;
-            
-            moyenne += (*capteur).getATMO(moment);//A CODER : on met que le jour ou quoi ?
+            //PARCOURS DE LA PERIODE
+			for(time_t time=dateDebut; time<=dateFin; )
+			{
+				moyenne += (*capteur).getATMO(time);
+				moyPeriode=moyPeriode/nbJours;	
+			}			
         }
+		moyenne=moyenne+moyPeriode;
     }
+	moyenne=moyenne/nbCapteurs.0;
+	return moyenne;
 
 }
 
-
-vector<Capteur> Services::identifierCapteursNonFiables(string jour)
-{
-   vector<Capteur> listeCapteurs;
-    for (auto capteur = listeCapteurs.begin(); capteur != listeCapteurs.end(); ++capteur)
-    {
-        double moyenne=(*capteur).getMoyenneATMO();
-        double rayon=0.5;
-        double moyenneZone=moyenneQualiteAir((*capteur).getPosition(),rayon,jour);
-        if(moyenne<0.5*moyenneZone || moyenne>2*moyenne)//A REVOIR S
-        {
-
-        }
-
-    }
-}*/
