@@ -18,6 +18,7 @@ public:
     double getMoyATMO(time_t dateDebut, time_t dateFin);
     int maxi(int, int, int, int);
     int index(double valeur, double palier1, double palier2, double palier3, double palier4, double palier5, double palier6, double palier7, double palier8, double palier9);
+    int ajouterMesure(Mesure mesure);
 
 protected:
 

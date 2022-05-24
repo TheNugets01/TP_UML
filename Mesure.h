@@ -8,10 +8,13 @@ public:
     
     Mesure (time_t d, double v, Attribut a);
     virtual ~Mesure ( );
+    time_t getDate();
+    double getValeur();
+    Attribut getAttribut();
+
+protected:
 
     time_t date;
     double valeur;
     Attribut attribut;
-protected:
-
 };
