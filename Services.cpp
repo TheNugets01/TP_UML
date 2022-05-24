@@ -3,12 +3,10 @@ using namespace std;
 #include <sstream>
 #include <string>
 #include <vector>
-
 #include <fstream>
 using std::fstream;
 
 #include "Services.h"
-
 
 Services::Services ()
 {
@@ -75,6 +73,7 @@ vector<Capteur> Services::identifierCapteursNonFiables()
     
 }*/
 
+
 vector<Capteur> Services::initCapteur(istream& str )
 {
     
@@ -99,4 +98,33 @@ vector<Capteur> Services::initCapteur(istream& str )
         cout<< sensorID << lat << lng <<endl;
     }
     return capteurs;
+}
+
+vector<Mesure> Services::initMesure(istream& str )
+{
+    
+    vector<Mesure> mesures;
+    string ligne;
+    string temps;
+    string sensorID;
+    string attribut;
+    string mesure;
+    
+    while( getline(str,ligne) )
+    {
+        istringstream iss{ligne};
+        getline(iss,sensorID,';');
+        Mesure mesure;
+        mesure.push_back(mesure);
+
+        string temps = "2012-12-20";
+        tm* tf = new tm();
+        tf->tm_year = stoi(temps.substr(0,4)) - 1900;
+        tf->tm_mon = stoi(temps.substr(5,2)) - 1;
+        tf->tm_mday = stoi(temps.substr(8,2));
+        time_t time = mktime(tf);
+        cout << asctime(tf) << endl;
+
+    }
+    return mesures;
 }
