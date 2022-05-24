@@ -45,7 +45,28 @@ char * Saisi( )
 
 int main()
 {
-    Services *service = new Services();
+    Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0)));
+    string sdate2 = "2019-01-01";
+    time_t date2;
+    tm* tf = new tm();
+    tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
+    tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
+    tf->tm_mday = stoi(sdate2.substr(8,2));
+    date2 = mktime(tf);
+
+    Attribut *at1 = new Attribut("O3","µg/m3","concentration d'ozone");
+    Attribut *at2 = new Attribut("SO2","µg/m3","concentration de dioxyde de soufre");
+    Attribut *at3 = new Attribut("NO2","µg/m3","concentration de dioxyde d'azote");
+    Attribut *at4 = new Attribut("PM10","g/m3","concentration de particules fines");
+
+    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at1,50.25)));
+    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at2,74.5)));
+    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at3,41.5)));
+    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at4,44.75)));
+
+    cout << capteur->getATMO(date2) << endl;
+
+    /*Services *service = new Services();
     AfficherMenu();
     char lecture;
     cin >> lecture;
@@ -140,5 +161,5 @@ int main()
         AfficherMenu();
         cin >> lecture;
     }
-    return 0;
+    return 0;*/
 }
