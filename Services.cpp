@@ -62,9 +62,7 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, t
 	return moyenne;
 
 }
-<<<<<<< HEAD
 
-=======
 vector<Capteur> Services::identifierCapteursNonFiables()
 {
     
@@ -94,4 +92,3 @@ vector<Capteur> Services::initCapteur(istream& str )
     }
     return capteurs;
 }
->>>>>>> 315c9213a9435f7bb0597a41a9bf98b1ce283275
