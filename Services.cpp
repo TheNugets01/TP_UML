@@ -9,6 +9,7 @@ using std::fstream;
 
 #include "Services.h"
 
+#define DAY 86400
 
 Services::Services ()
 {
@@ -69,11 +70,36 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 
 }*/
 
-/*
-vector<Capteur> Services::identifierCapteursNonFiables()
+//lister les capteurs non fiables detectés entre deux dates 
+vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t dateFin)
 {
-    
-}*/
+    vector<Capteur> liste_non_fiables;
+    const double rayon = 0.5;
+    double moyenne=0;
+    double moyenneZone=0;
+
+    fstream source;
+    source.open("sensors.csv");
+
+    vector<Capteur> listeCapteurs=this->initCapteur(source);//RECUPERER LES LISTES DE CAPTEURS INITIALISEE  PARTIR DU CSV
+    for (auto capteur = begin(listeCapteurs); capteur != end(listeCapteurs); ++capteur)
+    {
+        moyenne = capteur->getMoyATMO(dateDebut, dateFin);
+        moyenneZone = moyenneQualiteAir(capteur->getPosition(),rayon,dateDebut, dateFin);
+
+        if(moyenne<0.5*moyenneZone || moyenne>2*moyenne){
+            liste_non_fiables.push_back(*capteur);
+        }
+        else{
+            for (time_t day = dateDebut; day <= dateFin; day += DAY){
+                if(capteur->getATMO(day)<0.5*moyenne||capteur->getATMO(day)>1.5*moyenne){
+                    liste_non_fiables.push_back(*capteur);
+                }
+            }
+        }
+    }
+    return liste_non_fiables;
+}
 
 vector<Capteur> Services::initCapteur(istream& str )
 {
