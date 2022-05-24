@@ -9,7 +9,7 @@ GETSET: EXTFLAGS += -DGETSET
 GETSET: main
 
 main : Utilisateur.o Position.o Attribut.o Mesure.o Services.o main.o 
-		g++ -o main Utilisateur.o Position.o Attribut.o Mesure.o main.o $(EXTFLAGS)
+		g++ -o main Utilisateur.o Position.o Attribut.o Mesure.o main.o Services.o Capteur.o$(EXTFLAGS)
 
 Utilisateur.o : Utilisateur.cpp
 		g++ -c -g $(EXTFLAGS) Utilisateur.cpp
