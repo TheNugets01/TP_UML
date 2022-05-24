@@ -130,7 +130,6 @@ vector<Attribut> Services::initAttribut(istream& str){
 vector<Mesure> Services::initMesure(istream& str )
 {
     vector<Mesure> mesures;
-    vector<Mesure> mesuresCapteur;
     fstream sourceCap;
     sourceCap.open("sensors.csv");
     vector<Capteur> capteurs = initCapteur(sourceCap);
@@ -145,8 +144,6 @@ vector<Mesure> Services::initMesure(istream& str )
     string sValeur;
 
     int itr=0;
-    time_t tempsPrecedent;
-
 
     while( getline(str,ligne) && itr<10000000)
     {
@@ -161,12 +158,6 @@ vector<Mesure> Services::initMesure(istream& str )
         tf->tm_mday = stoi(sTemps.substr(8,2));
         time_t temps = mktime(tf);
 
-        // Au premier passage ont ne peut psa connaitre le temps précedent donc on les considere identique
-        if( itr == 1 ){
-            tempsPrecedent = temps;
-        }
-        
-
         getline(iss,sensorID,';'); //Sensor ID
 
         getline(iss,attributID,';'); //Attribut
@@ -177,26 +168,20 @@ vector<Mesure> Services::initMesure(istream& str )
             }
         }
 
-
         getline(iss,sValeur,';');//Valeur
         double valeur = stod(sValeur);
         
         Mesure mesure(temps , sensorID , attribut , valeur);
         mesures.push_back(mesure);
 
-        if(tempsPrecedent == temps)
-        //Si temps même que précedent ajouter mesure
-        {
-            mesuresCapteur.push_back(mesure);
-        } else { //Sinon envoyer la liste au capteur défini
-
-        }
         for( auto capteur : capteurs  )
         {
-            
+            if( sensorID.compare( capteur.getID() ) == 0)
+            {
+                capteur.ajouterMesure(mesure);
+            }
         }
-
-        tempsPrecedent = temps;
     }
+
     return mesures;
 }
