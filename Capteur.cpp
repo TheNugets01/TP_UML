@@ -87,25 +87,25 @@ int Capteur::getATMO(time_t date)
         vector<Mesure>::iterator itvec;
         for(itvec = begin(mesure) ; itvec != end(mesure) ; ++itvec)
         {
-            string idGaz = itvec->attribut.id;
+            string idGaz = itvec->getAttribut().getID();
             if(idGaz == "O3")
             {
-                atmoO3 += itvec->valeur;
+                atmoO3 += itvec->getValeur();
                 nbO3++;
             }
             else if(idGaz == "SO2")
             {
-                atmoSO2 += itvec->valeur;
+                atmoSO2 += itvec->getValeur();
                 nbSO2++;
             }
             else if(idGaz == "NO2")
             {
-                atmoNO2 += itvec->valeur;
+                atmoNO2 += itvec->getValeur();
                 nbNO2++;
             }
             else if(idGaz == "PM10")
             {
-                atmoPM10 += itvec->valeur;
+                atmoPM10 += itvec->getValeur();
                 nbPM10++;
             }
         }
@@ -154,6 +154,22 @@ double Capteur::getMoyATMO(time_t dateDebut, time_t dateFin)
     else
         moy = total/nb;
 	return moy;
+}
+
+int Capteur::ajouterMesure(Mesure mesure)
+{
+    auto it = mesures.find(mesure.getDate());
+	if (it != mesures.end())
+	{
+		vector<Mesure>& l = it->second;
+		l.emplace_back(mesure);
+	}
+	else 
+	{
+		vector<Mesure> l;
+		l.emplace_back(mesure);
+		mesures.emplace(mesure.getDate(), l);
+	}
 }
 
 Position Capteur::getPosition()
