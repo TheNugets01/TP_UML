@@ -6,10 +6,10 @@ class Mesure
 {
 public:
     
-    Mesure (string d, double v, Attribut a);
+    Mesure (time_t d, double v, Attribut a);
     virtual ~Mesure ( );
 
-    string date;
+    time_t date;
     double valeur;
     Attribut attribut;
 protected:

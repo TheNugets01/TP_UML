@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-
+#define DAY 86400
 
 #include "Capteur.h"
 #include "Position.h"
@@ -69,12 +69,12 @@ int Capteur::index(double valeur, double palier1, double palier2, double palier3
 	return index;
 }
 
-int Capteur::getATMO(string date)
+int Capteur::getATMO(time_t date)
 {
     double atmoO3 = 0.0, atmoSO2 = 0.0, atmoNO2 = 0.0, atmoPM10 = 0.0;
 	double nbO3 = 0.0, nbSO2 = 0.0, nbNO2 = 0.0, nbPM10 = 0.0;
 
-    unordered_map<string, vector<Mesure>>::const_iterator itmap = mesures.find(date);
+    unordered_map<time_t, vector<Mesure>>::const_iterator itmap = mesures.find(date);
     vector<Mesure> mesure;
 
     if (itmap == mesures.end())
@@ -137,6 +137,23 @@ int Capteur::getATMO(string date)
         return maxi(indexO3,indexSO2,indexNO2,indexPM10);
     }
 
+}
+
+double Capteur::getMoyATMO(time_t dateDebut, time_t dateFin)
+{
+	double total = 0.0;
+	double nb = 0.0;
+    double moy = 0.0;
+	for (time_t t = dateDebut; t <= dateFin; t += DAY) //iterating each 24h starting with timestampStart
+	{
+		total += getATMO(t);
+		nb++;
+	}
+	if (nb == 0)
+		moy = 0;
+    else
+        moy = total/nb;
+	return moy;
 }
 
 Position Capteur::getPosition()
