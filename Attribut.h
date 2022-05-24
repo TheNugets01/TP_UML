@@ -8,6 +8,7 @@ class Attribut
 public:
     
     Attribut (string id, string u, string desc);
+    Attribut();
     virtual ~Attribut ( );
     string getID();
 

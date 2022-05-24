@@ -132,22 +132,31 @@ vector<Mesure> Services::initMesure(istream& str )
     
     vector<Mesure> mesures;
     string ligne;
-    string temps;
+    string sTemps;
     string sensorID;
-    string attribut;
-    string mesure;
+    string attributID;
+    string valeur;
+
+    fstream source;
+    source.open("attributes.csv");
+    vector<Attribut> attributs = initAttribut(source);
     
     while( getline(str,ligne) )
     {
         istringstream iss{ligne};
+
+        getline(iss,sTemps,';');
+        tm* tf = new tm();
+        tf->tm_year = stoi(sTemps.substr(0,4)) - 1900;
+        tf->tm_mon = stoi(sTemps.substr(5,2)) - 1;
+        tf->tm_mday = stoi(sTemps.substr(8,2));
+        time_t temps = mktime(tf);
         getline(iss,sensorID,';');
+        getline(iss,attributID,';');
+        getline(iss,valeur,';');
 
         string temps = "2012-12-20";
-        tm* tf = new tm();
-        tf->tm_year = stoi(temps.substr(0,4)) - 1900;
-        tf->tm_mon = stoi(temps.substr(5,2)) - 1;
-        tf->tm_mday = stoi(temps.substr(8,2));
-        time_t time = mktime(tf);
+        
         cout << asctime(tf) << endl;
 
     }
