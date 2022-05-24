@@ -4,7 +4,6 @@
 #include <time.h>
 
 #include "Utilisateur.h"
-#include "Capteur.h"
 #include "Services.h"
 
 

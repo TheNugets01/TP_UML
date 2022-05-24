@@ -80,6 +80,7 @@ int Capteur::getATMO(time_t date)
     if (itmap == mesures.end())
 	{
         cerr << "Pas de mesures pour cette date" << endl;
+		return 0;
 	}
     else
     {
@@ -150,9 +151,13 @@ double Capteur::getMoyATMO(time_t dateDebut, time_t dateFin)
 		nb++;
 	}
 	if (nb == 0)
+	{
 		moy = 0;
+	}
     else
+	{
         moy = total/nb;
+	}
 	return moy;
 }
 
@@ -170,6 +175,7 @@ int Capteur::ajouterMesure(Mesure mesure)
 		l.emplace_back(mesure);
 		mesures.emplace(mesure.getDate(), l);
 	}
+	return 0;
 }
 
 Position Capteur::getPosition()
