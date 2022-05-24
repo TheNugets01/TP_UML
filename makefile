@@ -8,7 +8,7 @@ MAP: main
 GETSET: EXTFLAGS += -DGETSET
 GETSET: main
 
-main : Utilisateur.o Position.o Attribut.o Mesure.o main.o 
+main : Utilisateur.o Position.o Attribut.o Mesure.o Services.o main.o 
 		g++ -o main Utilisateur.o Position.o Attribut.o Mesure.o main.o $(EXTFLAGS)
 
 Utilisateur.o : Utilisateur.cpp
@@ -22,6 +22,12 @@ Attribut.o : Attribut.cpp
 
 Mesure.o : Mesure.cpp
 		g++ -c -g $(EXTFLAGS) Mesure.cpp
+
+Services.o : Services.cpp
+		g++ -c -g $(EXTFLAGS) Services.cpp
+
+Capteur.o : Capteur.cpp
+		g++ -c -g $(EXTFLAGS) Capteur.cpp
 
 main.o : main.cpp
 		g++ -c -g $(EXTFLAGS) main.cpp

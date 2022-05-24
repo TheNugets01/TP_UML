@@ -4,6 +4,7 @@ using namespace std;
 #include <iostream>
 
 
+#include "Capteur.h"
 
 class Services
 {
@@ -15,7 +16,7 @@ public:
     double moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin);
     double moyenneQualiteAir(Position p, double rayon, time_t jour);
     vector<Capteur> initCapteur(istream& str);
-    vector<Capteur> identifierCapteursNonFiables();
+    //vector<Capteur> identifierCapteursNonFiables();
 
 };
 
