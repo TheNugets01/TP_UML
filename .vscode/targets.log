@@ -1,0 +1,365 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.2.1
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2016 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Tue May 24 09:53:45 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
+# default
+.SHELLFLAGS := -c
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /mnt/d/Users/hugos/Documents/Cours/3IF/GLUML/TP_UML
+# makefile
+SHELL = /bin/sh
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+# environment
+_ = /home/nugetss/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/node
+# makefile (from 'makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# environment
+VSCODE_CWD = /mnt/d/Programmes/Microsoft VS Code
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+PATH = /home/nugetss/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Intel/Shared Libraries/redist/intel64/compiler:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/ProgramData/Oracle/Java/javapath:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/Java/jdk1.8.0_102/bin:/mnt/c/Program Files (x86)/Microsoft SQL Server/110/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/110/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/110/DTS/Binn/:/mnt/d/Programmes/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/d/Programmes/MATLAB/bin:/mnt/c/Users/hugos/AppData/Local/Programs/AdoptOpenJDK/jdk-11.0.10.9-hotspot/bin:/mnt/c/Users/hugos/AppData/Local/Microsoft/WindowsApps:/mnt/d/Programmes/Microsoft VS Code/bin:/mnt/d/Programmes/msys64/mingw64/bin:/snap/bin
+# environment
+VSCODE_LOG_STACK = false
+# environment
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-89f915b5-da43-4835-8443-5d682be9cc88.sock
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /mnt/d/Users/hugos/Documents/Cours/3IF/GLUML/TP_UML
+# default
+.LOADED := 
+# environment
+WSL_INTEROP = /run/WSL/2389_interop
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/nugetss
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# environment
+LOGNAME = nugetss
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 0
+# default
+MAKE_VERSION := 4.2.1
+# environment
+USER = nugetss
+# makefile
+.DEFAULT_GOAL := all
+# environment
+NAME = LAPTOP-BOPBCNJO
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/hugos/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
+# default
+MAKE_COMMAND := make
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# makefile
+MAKEFLAGS = pqrR
+# environment
+MFLAGS = -pqrR
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+VSCODE_HANDLES_SIGPIPE = true
+# makefile (from 'makefile', line 1)
+EXTFLAGS = -ansi -pedantic -Wall -std=c++11
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+LC_ALL = C
+# environment
+HOSTTYPE = x86_64
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+TERM = xterm-256color
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+WSL_DISTRO_NAME = Ubuntu
+# variable set hash-table stats:
+# Load=68/1024=7%, Rehash=0, Collisions=4/99=4%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 48, inode 2814749767204721): 31 files, no impossibilities.
+
+# 31 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+all: main
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+
+Position.o: Position.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-10 10:11:31.2894039
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 18):
+		g++ -c -g $(EXTFLAGS) Position.cpp
+
+Utilisateur.o: Utilisateur.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-10 10:11:31.0433651
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 15):
+		g++ -c -g $(EXTFLAGS) Utilisateur.cpp
+
+# Not a target:
+Attribut.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-24 09:37:13.0811273
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# makefile (from 'makefile', line 5)
+MAP: EXTFLAGS += -DMAP
+MAP: main
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=1/32=3%, Rehash=0, Collisions=0/2=0%
+
+Capteur.o: Capteur.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-24 09:50:48.604886
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 30):
+		g++ -c -g $(EXTFLAGS) Capteur.cpp
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-24 09:50:48.6133073
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-24 09:52:36.9981752
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Mesure.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-24 09:36:40.5507683
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Services.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-24 09:46:02.3772038
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Position.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-10 10:11:27.903205
+#  File has been updated.
+#  Successfully updated.
+
+Attribut.o: Attribut.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-24 09:50:48.5886257
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 21):
+		g++ -c -g $(EXTFLAGS) Attribut.cpp
+
+# makefile (from 'makefile', line 8)
+GETSET: EXTFLAGS += -DGETSET
+GETSET: main
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+# variable set hash-table stats:
+ 
+# Load=1/32=3%, Rehash=0, Collisions=0/2=0%
+
+# Not a target:
+Utilisateur.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-10 10:10:42.9470622
+#  File has been updated.
+#  Successfully updated.
+
+main: Utilisateur.o Position.o Attribut.o Mesure.o Services.o Capteur.o main.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+#  recipe to execute (from 'makefile', line 12):
+		g++ -o main Utilisateur.o Position.o Attribut.o Mesure.o Services.o Capteur.o main.o $(EXTFLAGS)
+
+main.o: main.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  Last modified 2022-05-24 09:46:02.4328719
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := main.o
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := main.cpp
+# automatic
+# | := 
+# automatic
+# < := main.cpp
+# automatic
+# ^ := main.cpp
+# automatic
+# ? := main.cpp
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'makefile', line 33):
+		g++ -c -g $(EXTFLAGS) main.cpp
+
+# Not a target:
+Capteur.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-24 09:46:02.620419
+#  File has been updated.
+#  Successfully updated.
+
+Mesure.o: Mesure.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-24 09:46:02.5665799
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 24):
+		g++ -c -g $(EXTFLAGS) Mesure.cpp
+
+Services.o: Services.cpp
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-24 09:46:02.4015214
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'makefile', line 27):
+		g++ -c -g $(EXTFLAGS) Services.cpp
+
+# files hash-table stats:
+# Load=21/1024=2%, Rehash=0, Collisions=0/62=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 39 / storage = 405 B / avg = 10 B
+# current buf: size = 8162 B / used = 405 B / count = 39 / avg = 10 B
+
+# strcache performance: lookups = 84 / hit rate = 53%
+# hash-table stats:
+# Load=39/8192=0%, Rehash=0, Collisions=1/84=1%
+# Finished Make data base on Tue May 24 09:53:45 2022
+
+ 
