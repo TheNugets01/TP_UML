@@ -39,9 +39,10 @@ int main()
 
     Services* service = new Services();
     fstream source;
-    source.open("attributes.csv");
-    service->initAttribut(source);
-
+    source.open("measurements.csv");
+    service->initMesure(source);
+    
+    //service->initAttribut(source);
     //service->moyenneQualiteAir(*p1,2.4,"2019-01-02");
 
 

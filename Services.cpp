@@ -129,36 +129,45 @@ vector<Attribut> Services::initAttribut(istream& str){
 
 vector<Mesure> Services::initMesure(istream& str )
 {
-    
     vector<Mesure> mesures;
     string ligne;
     string sTemps;
     string sensorID;
     string attributID;
-    string valeur;
+    string sValeur;
 
     fstream source;
     source.open("attributes.csv");
     vector<Attribut> attributs = initAttribut(source);
-    
-    while( getline(str,ligne) )
+    int itr=0;
+    while( getline(str,ligne) && itr<5)
     {
+        itr++;
         istringstream iss{ligne};
 
-        getline(iss,sTemps,';');
+        getline(iss,sTemps,';'); //Date de la mesure
         tm* tf = new tm();
         tf->tm_year = stoi(sTemps.substr(0,4)) - 1900;
         tf->tm_mon = stoi(sTemps.substr(5,2)) - 1;
         tf->tm_mday = stoi(sTemps.substr(8,2));
         time_t temps = mktime(tf);
-        getline(iss,sensorID,';');
-        getline(iss,attributID,';');
-        getline(iss,valeur,';');
-
-        string temps = "2012-12-20";
         
-        cout << asctime(tf) << endl;
 
+        getline(iss,sensorID,';'); //Sensor ID
+
+        getline(iss,attributID,';'); //Attribut
+        Attribut attribut;
+        for(int i = 0; i<attributs.size() ;++i){
+            if( attributID.compare(attributs[i].getID()) == 0 ){
+                attribut = attributs[i];
+            }
+        }
+
+        getline(iss,sValeur,';');//Valeur
+        double valeur = stod(sValeur);
+        
+        Mesure mesure(temps , sensorID , attribut , valeur);
+        mesures.push_back(mesure);
     }
     return mesures;
 }
