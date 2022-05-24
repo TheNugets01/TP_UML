@@ -8,7 +8,7 @@ class Mesure
 {
 public:
     
-    Mesure (time_t d, double v, Attribut a);
+    Mesure (time_t d, string sensorID,Attribut a, double v);
     virtual ~Mesure ( );
     time_t getDate();
     double getValeur();
@@ -16,6 +16,7 @@ public:
 
 protected:
 
+    string sensorID;
     time_t date;
     double valeur;
     Attribut attribut;

@@ -20,6 +20,7 @@ public:
     double moyenneQualiteAir(Position p, double rayon, time_t jour);
     vector<Capteur> initCapteur(istream& str);
     vector<Mesure> initMesure(istream& str );
+    vector<Attribut> initAttribut(istream& str);
     //vector<Capteur> identifierCapteursNonFiables();
 
 };
