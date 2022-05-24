@@ -44,7 +44,7 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 }
 
 
-/*double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
+double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
 {
     int nbCapteurs=0;
     double moyPeriode=0;
@@ -68,7 +68,7 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 	moyenne=moyenne/nbCapteurs;
 	return moyenne;
 
-}*/
+}
 
 //lister les capteurs non fiables detectés entre deux dates 
 vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t dateFin)
