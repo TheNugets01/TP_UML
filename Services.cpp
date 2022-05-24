@@ -4,6 +4,9 @@ using namespace std;
 #include <string>
 #include <vector>
 
+#include <fstream>
+using std::fstream;
+
 #include "Services.h"
 
 
@@ -23,8 +26,10 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 {
     int nbCapteurs=0;
     double moyenne=0;
-    vector<Capteur> listeCapteurs;//RECUPERER LES LISTES DE CAPTEURS INITIALISEE  PARTIR DU CSV
-    for (auto capteur = listeCapteurs.begin(); capteur != listeCapteurs.end(); ++capteur)
+    fstream source;
+    source.open("sensors.csv");
+    vector<Capteur> listeCapteurs=this->initCapteur(source);//RECUPERER LES LISTES DE CAPTEURS INITIALISEE  PARTIR DU CSV
+    for (auto capteur = begin(listeCapteurs); capteur != end(listeCapteurs); ++capteur)
     {
         if((*capteur).getPosition().estDansLaZone(p,rayon))
         {
@@ -33,6 +38,7 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
         }
     }
     moyenne= moyenne/(nbCapteurs);
+    source.close();
     return moyenne;
 }
 
