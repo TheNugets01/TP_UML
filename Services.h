@@ -19,4 +19,3 @@ public:
     vector<Capteur> identifierCapteursNonFiables(time_t dateDebut, time_t dateFin);
 
 };
-

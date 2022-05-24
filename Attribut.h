@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 using namespace std;
 
@@ -5,7 +7,8 @@ class Attribut
 {
 public:
     
-    Attribut (string u, string desc);
+    Attribut (string id, string u, string desc);
+    Attribut();
     virtual ~Attribut ( );
     string getID();
 
