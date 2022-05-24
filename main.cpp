@@ -36,7 +36,7 @@ int main()
     cout << asctime(tf) << endl;
 
     Services* service = new Services();
-    service->moyenneQualiteAir(*p1,2.4,"2019-01-02");
+    //service->moyenneQualiteAir(*p1,2.4,"2019-01-02");
 
 
     return 0;
