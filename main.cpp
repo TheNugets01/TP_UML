@@ -5,6 +5,7 @@
 
 #include "Utilisateur.h"
 #include "Capteur.h"
+#include "Services.h"
 
 using namespace std;
 
@@ -33,6 +34,10 @@ int main()
     tf->tm_mday = stoi(temps.substr(8,2));
     mktime(tf);
     cout << asctime(tf) << endl;
+
+    Services* service = new Services();
+    service->moyenneQualiteAir(*p1,2.4,"2019-01-02");
+
 
     return 0;
 }
