@@ -1,14 +1,13 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/mnt/d/Users/hugos/Documents/Cours/3IF/GLUML/TP_UML'
 g++ -c -g -ansi -pedantic -Wall -std=c++11 Utilisateur.cpp
- 
 g++ -c -g -ansi -pedantic -Wall -std=c++11 Position.cpp
 g++ -c -g -ansi -pedantic -Wall -std=c++11 Attribut.cpp
- 
 g++ -c -g -ansi -pedantic -Wall -std=c++11 Mesure.cpp
-g++ -c -g -ansi -pedantic -Wall -std=c++11 Services.cpp
  
+g++ -c -g -ansi -pedantic -Wall -std=c++11 Services.cpp
+g++ -c -g -ansi -pedantic -Wall -std=c++11 Capteur.cpp
 g++ -c -g -ansi -pedantic -Wall -std=c++11 main.cpp
-g++ -o main Utilisateur.o Position.o Attribut.o Mesure.o main.o -ansi -pedantic -Wall -std=c++11
+g++ -o main Utilisateur.o Position.o Attribut.o Mesure.o Services.o Capteur.o main.o -ansi -pedantic -Wall -std=c++11
 make: Leaving directory '/mnt/d/Users/hugos/Documents/Cours/3IF/GLUML/TP_UML'
  
