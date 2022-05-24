@@ -114,8 +114,6 @@ vector<Mesure> Services::initMesure(istream& str )
     {
         istringstream iss{ligne};
         getline(iss,sensorID,';');
-        Mesure mesure;
-        mesure.push_back(mesure);
 
         string temps = "2012-12-20";
         tm* tf = new tm();
