@@ -6,7 +6,10 @@
 #include "Capteur.h"
 #include "Services.h"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 315c9213a9435f7bb0597a41a9bf98b1ce283275
 using namespace std;
 
 int main()

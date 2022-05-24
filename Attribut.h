@@ -8,8 +8,9 @@ public:
     Attribut (string u, string desc);
     virtual ~Attribut ( );
 
+    string id;
+    string unite;
+    string description;
 protected:
 
-string unite;
-string description;
 };
