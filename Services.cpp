@@ -123,8 +123,8 @@ vector<Mesure> Services::initMesure(istream& str )
         tf->tm_year = stoi(temps.substr(0,4)) - 1900;
         tf->tm_mon = stoi(temps.substr(5,2)) - 1;
         tf->tm_mday = stoi(temps.substr(8,2));
-        time_t time = mktime(tf);
-        cout << asctime(tf) << endl;
+        /*time_t time = mktime(tf);
+        cout << asctime(tf) << endl;*/
 
     }
     return mesures;

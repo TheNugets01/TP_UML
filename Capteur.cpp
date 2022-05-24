@@ -182,3 +182,8 @@ Position Capteur::getPosition()
 {
     return position;
 }
+
+string Capteur::getID()
+{
+	return sensorID;
+}
