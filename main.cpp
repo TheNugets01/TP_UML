@@ -10,6 +10,7 @@
 #include "Utilisateur.h"
 #include "Capteur.h"
 #include "Services.h"
+#include "Test.h"
 
 #define TAILLEBUFFER 100
 #define VIDEBUFFERCLAVIER() char ch; while( (ch = getchar() != '\n') && ch != EOF );
@@ -45,6 +46,7 @@ char * Saisi( )
 
 int main()
 {
+    
     Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0)));
     string sdate2 = "2019-01-01";
     time_t date2;
@@ -53,6 +55,7 @@ int main()
     tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
     tf->tm_mday = stoi(sdate2.substr(8,2));
     date2 = mktime(tf);
+    
 
     string sdate3 = "2019-01-05";
     time_t date3;
@@ -62,6 +65,7 @@ int main()
     tf1->tm_mday = stoi(sdate3.substr(8,2));
     date3 = mktime(tf1);
 
+    /*
     Attribut *at1 = new Attribut("O3","µg/m3","concentration d'ozone");
     Attribut *at2 = new Attribut("SO2","µg/m3","concentration de dioxyde de soufre");
     Attribut *at3 = new Attribut("NO2","µg/m3","concentration de dioxyde d'azote");
@@ -78,6 +82,7 @@ int main()
     capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at4,41.75)));
 
     //cout << capteur->getATMO(date2) << endl;
+    */
 
     Position* p1= new Position(44.0, -1.0);
     Services* service = new Services();
@@ -85,6 +90,8 @@ int main()
     double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
     cout<<"Moyenne finale : "<<moyenne<<endl;
     cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
+
+    Test* t= new Test();
 
     /*
     Services *service = new Services();
