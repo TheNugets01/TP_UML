@@ -182,3 +182,22 @@ Position Capteur::getPosition()
 {
     return position;
 }
+
+string Capteur::getID()
+{
+	return sensorID;
+}
+
+unordered_map<time_t, vector<Mesure>>& Capteur::getMesures()
+{
+	return mesures;
+}
+
+void Capteur::setMesures(time_t temps, vector<Mesure> listMesure){
+	mesures.insert( make_pair(temps , listMesure) );
+}
+
+bool operator==(const Capteur& c1, const Capteur& c2)
+{
+	return c1.sensorID== c2.sensorID;
+}

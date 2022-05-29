@@ -4,7 +4,7 @@ using namespace std;
 
 #include "Mesure.h"
 
-Mesure::Mesure (time_t d, string sID,Attribut a, double v):date(d),sensorID(sID),valeur(v),attribut(a)
+Mesure::Mesure (time_t d, string sID,Attribut a, double v):date(d),sensorID(sID),attribut(a),valeur(v)
 {} 
 
 Mesure::~Mesure ( )
