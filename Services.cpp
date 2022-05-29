@@ -35,7 +35,7 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
     fstream source;
     cap.open("sensors.csv");
     source.open("measurements.csv");
-    vector<Capteur> capteurs=initCapteur(cap);
+    vector<Capteur> capteurs=initCapteurs(cap);
 
     initMesure(source,capteurs);
 
@@ -83,7 +83,7 @@ vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t 
     source.open("sensors.csv");
     mesures.open("measurements.csv");
 
-    vector<Capteur> listeCapteurs=initCapteur(source);//RECUPERER LES LISTES DE CAPTEURS INITIALISEE  PARTIR DU CSV
+    vector<Capteur> listeCapteurs=initCapteurs(source);//RECUPERER LES LISTES DE CAPTEURS INITIALISEE  PARTIR DU CSV
     initMesure(mesures,listeCapteurs);
 
     //bool pushed;
@@ -115,10 +115,12 @@ vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t 
         }
         //if(!pushed)cout<<"unpushed"<<endl;
     }
+    source.close();
+    mesures.close();
     return liste_non_fiables;
 }
 
-vector<Capteur> Services::initCapteur(istream& str)
+vector<Capteur> Services::initCapteurs(istream& str)
 {
     
     vector<Capteur> capteurs;
@@ -225,7 +227,7 @@ vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef,
     source.open("sensors.csv");
     mesures.open("measurements.csv");
 
-    vector<Capteur> capteurs=initCapteur(source);
+    vector<Capteur> capteurs=initCapteurs(source);
     initMesure(mesures,capteurs);
 
 
@@ -249,4 +251,3 @@ vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef,
 	std::sort(positions.begin(), positions.end(), c);
 	return positions;
 }
-
