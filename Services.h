@@ -1,10 +1,11 @@
-using namespace std;
+
 #include <string>
 #include <vector>
 #include <iostream>
 
-
 #include "Capteur.h"
+
+using namespace std;
 
 class Services
 {
