@@ -10,6 +10,7 @@ public:
 
 void testEstDansLaZone();
 void testGetAtmo();
+void runTests();
 Test();
 
 };

@@ -86,12 +86,13 @@ int main()
 
     Position* p1= new Position(44.0, -1.0);
     Services* service = new Services();
-    double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
-    double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
-    cout<<"Moyenne finale : "<<moyenne<<endl;
-    cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
+    //double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
+    //double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
+    //cout<<"Moyenne finale : "<<moyenne<<endl;
+    //cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
 
     Test* t= new Test();
+    t->runTests();
 
     /*
     Services *service = new Services();

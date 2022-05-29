@@ -8,6 +8,13 @@ using namespace std;
 Test::Test()
 {} 
 
+void Test::runTests()
+{
+    testEstDansLaZone();
+    testGetAtmo();
+}
+
+
 // estDansLaZone() tests
 
 void Test::testEstDansLaZone()
@@ -29,6 +36,7 @@ void Test::testGetAtmo()
 {
     cout<<"**************Test de getAtmo***********"<<endl;
     
+    cout<<" Resultat attendu :  6  "<<endl;
     Position a (44.0,0.0);
     Capteur c1 ("Sensor1", *(new Position (44.0,-0.3)));
 
@@ -55,6 +63,6 @@ void Test::testGetAtmo()
     c1.ajouterMesure(*m3);
     c1.ajouterMesure(*m4);
 
-    cout<<c1.getATMO(date2)<<endl;;
+    cout<<" Resultat obtenu :   "<<c1.getATMO(date2)<<endl;;
 
 }
