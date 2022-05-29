@@ -20,5 +20,5 @@ public:
     void initMesure(istream& str, vector<Capteur>& capteurs);
     vector<Attribut> initAttribut(istream& str);
     vector<Capteur> identifierCapteursNonFiables(time_t dateDebut, time_t dateFin);
-
+    vector<pair<double, Position>> zoneMemeQualiteAir(Capteur& capteurRef, time_t debut, time_t fin);
 };

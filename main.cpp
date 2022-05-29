@@ -12,7 +12,10 @@
 #include "Services.h"
 
 #define TAILLEBUFFER 100
-#define VIDEBUFFERCLAVIER() char ch; while( (ch = getchar() != '\n') && ch != EOF );
+#define VIDEBUFFERCLAVIER()                       \
+    char ch;                                      \
+    while ((ch = getchar() != '\n') && ch != EOF) \
+        ;
 
 using namespace std;
 
@@ -26,65 +29,65 @@ void AfficherMenu()
     cout << "q : Quitter" << endl;
 }
 
-char * Saisi( )
+char *Saisi()
 // Algorithme : Permet de saisir une chaine de caractère au clavier et de la ranger dans une zone alloué dynamiquement
 {
     char unMot[TAILLEBUFFER];
     cin >> unMot;
 
-    char * leMot = new char[strlen(unMot)+1];
-    strcpy( leMot , unMot );
-    
-    if(strcmp(leMot,"-1") != 0)
+    char *leMot = new char[strlen(unMot) + 1];
+    strcpy(leMot, unMot);
+
+    if (strcmp(leMot, "-1") != 0)
     {
         VIDEBUFFERCLAVIER();
     }
-    
+
     return leMot;
 } //----- Fin de Saisi
 
 int main()
 {
-    Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0)));
+    Capteur *capteur = new Capteur("Sensor0", *(new Position(44.0, -1.0)));
     string sdate2 = "2019-01-01";
     time_t date2;
-    tm* tf = new tm();
-    tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
-    tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
-    tf->tm_mday = stoi(sdate2.substr(8,2));
+    tm *tf = new tm();
+    tf->tm_year = stoi(sdate2.substr(0, 4)) - 1900;
+    tf->tm_mon = stoi(sdate2.substr(5, 2)) - 1;
+    tf->tm_mday = stoi(sdate2.substr(8, 2));
     date2 = mktime(tf);
 
     string sdate3 = "2019-01-05";
     time_t date3;
-    tm* tf1 = new tm();
-    tf1->tm_year = stoi(sdate3.substr(0,4)) - 1900;
-    tf1->tm_mon = stoi(sdate3.substr(5,2)) - 1;
-    tf1->tm_mday = stoi(sdate3.substr(8,2));
+    tm *tf1 = new tm();
+    tf1->tm_year = stoi(sdate3.substr(0, 4)) - 1900;
+    tf1->tm_mon = stoi(sdate3.substr(5, 2)) - 1;
+    tf1->tm_mday = stoi(sdate3.substr(8, 2));
     date3 = mktime(tf1);
 
-    Attribut *at1 = new Attribut("O3","µg/m3","concentration d'ozone");
-    Attribut *at2 = new Attribut("SO2","µg/m3","concentration de dioxyde de soufre");
-    Attribut *at3 = new Attribut("NO2","µg/m3","concentration de dioxyde d'azote");
-    Attribut *at4 = new Attribut("PM10","g/m3","concentration de particules fines");
+    Attribut *at1 = new Attribut("O3", "µg/m3", "concentration d'ozone");
+    Attribut *at2 = new Attribut("SO2", "µg/m3", "concentration de dioxyde de soufre");
+    Attribut *at3 = new Attribut("NO2", "µg/m3", "concentration de dioxyde d'azote");
+    Attribut *at4 = new Attribut("PM10", "g/m3", "concentration de particules fines");
 
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at1,50.25)));
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at2,74.5)));
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at3,41.5)));
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at4,44.75)));
+    capteur->ajouterMesure(*(new Mesure(date2, "Sensor0", *at1, 50.25)));
+    capteur->ajouterMesure(*(new Mesure(date2, "Sensor0", *at2, 74.5)));
+    capteur->ajouterMesure(*(new Mesure(date2, "Sensor0", *at3, 41.5)));
+    capteur->ajouterMesure(*(new Mesure(date2, "Sensor0", *at4, 44.75)));
 
-     capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at1,53.25)));
-    capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at2,76.5)));
-    capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at3,48.5)));
-    capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at4,41.75)));
+    capteur->ajouterMesure(*(new Mesure(date3, "Sensor0", *at1, 53.25)));
+    capteur->ajouterMesure(*(new Mesure(date3, "Sensor0", *at2, 76.5)));
+    capteur->ajouterMesure(*(new Mesure(date3, "Sensor0", *at3, 48.5)));
+    capteur->ajouterMesure(*(new Mesure(date3, "Sensor0", *at4, 41.75)));
 
-    //cout << capteur->getATMO(date2) << endl;
+    cout << capteur->getATMO(date2) << endl;
 
-    Position* p1= new Position(44.0, -1.0);
-    Services* service = new Services();
-    double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
-    double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
-    cout<<"Moyenne finale : "<<moyenne<<endl;
-    cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
+    //  Position *p1 = new Position(44.0, -1.0);
+    //  Services *service1 = new Services();
+    //  double moyenne = service1->moyenneQualiteAir(*p1, 2.5, date2);
+    //  double moyennePeriode = service1->moyenneQualiteAir(*p1, 2.5, date2, date3);
+    //  cout << "Moyenne finale : " << moyenne << endl;
+    //  cout << "Moyenne sur la période : " << moyennePeriode << endl;
 
     /*
     Services *service = new Services();
@@ -168,7 +171,7 @@ int main()
 
             //capteurs = identifierCapteursNonFiables(date,date2);
             cout << "Voila la liste des capteurs non fiables : " << endl;
-            for (size_t i = 0; i < capteurs.size(); ++i) 
+            for (size_t i = 0; i < capteurs.size(); ++i)
             {
                 cout << capteurs[i].getID() << "; ";
             }
@@ -183,4 +186,37 @@ int main()
         cin >> lecture;
     }
     return 0;*/
+
+    Services *service = new Services();
+    vector<Capteur> capteurs;
+    string sdate;
+    time_t date;
+    cout << "Quelle est la date de debut (YYYY-MM-DD) ?" << endl;
+    cin >> sdate;
+    tm *tf2 = new tm();
+    tf2->tm_year = stoi(sdate.substr(0, 4)) - 1900;
+    tf2->tm_mon = stoi(sdate.substr(5, 2)) - 1;
+    tf2->tm_mday = stoi(sdate.substr(8, 2));
+    date = mktime(tf2);
+
+    string sdate22;
+    time_t date22;
+    cout << "Quelle est la date de fin (YYYY-MM-DD) ?" << endl;
+    cin >> sdate22;
+    tf->tm_year = stoi(sdate22.substr(0, 4)) - 1900;
+    tf->tm_mon = stoi(sdate22.substr(5, 2)) - 1;
+    tf->tm_mday = stoi(sdate22.substr(8, 2));
+    date22 = mktime(tf);
+    capteurs = service->identifierCapteursNonFiables(date, date22);
+    if (capteurs.size() > 0)
+    {
+        cout << "Voila la liste des capteurs non fiables : " << endl;
+        for (size_t i = 0; i < capteurs.size(); ++i)
+        {
+            cout << capteurs[i].getID() << "; ";
+        }
+    }
+    else
+        cout << "tous less capteurs sont fiables";
+    return 0;
 }
