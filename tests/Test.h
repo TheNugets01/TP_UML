@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Capteur.h"
-#include "Mesure.h"
+#include "../models/Capteur.h"
+#include "../models/Mesure.h"
 using namespace std;
 
 class Test

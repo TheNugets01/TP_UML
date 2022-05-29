@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-#include "Capteur.h"
+#include "../models/Capteur.h"
 
 using namespace std;
 

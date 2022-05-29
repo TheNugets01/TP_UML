@@ -3,9 +3,9 @@
 #include <vector>
 #include <iostream>
 
-#include "Capteur.h"
-#include "Attribut.h"
-#include "Services.h"
+#include "../models/Capteur.h"
+#include "../models/Attribut.h"
+#include "../models/Services.h"
 
 using namespace std;
 

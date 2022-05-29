@@ -11,29 +11,29 @@ GETSET: main
 main : Utilisateur.o Position.o Attribut.o Mesure.o Services.o ServiceInit.o main.o Capteur.o Test.o
 		g++ -o main Utilisateur.o Position.o Attribut.o Mesure.o main.o Services.o ServiceInit.o Capteur.o Test.o $(EXTFLAGS)
 
-Utilisateur.o : Utilisateur.cpp
-		g++ -c -g $(EXTFLAGS) Utilisateur.cpp
+Utilisateur.o : ./models/Utilisateur.cpp
+		g++ -c -g $(EXTFLAGS) ./models/Utilisateur.cpp
 
-Position.o : Position.cpp
-		g++ -c -g $(EXTFLAGS) Position.cpp
+Position.o : ./models/Position.cpp
+		g++ -c -g $(EXTFLAGS) ./models/Position.cpp
 
-Attribut.o : Attribut.cpp
-		g++ -c -g $(EXTFLAGS) Attribut.cpp
+Attribut.o : ./models/Attribut.cpp
+		g++ -c -g $(EXTFLAGS) ./models/Attribut.cpp
 
-Mesure.o : Mesure.cpp
-		g++ -c -g $(EXTFLAGS) Mesure.cpp
+Mesure.o : ./models/Mesure.cpp
+		g++ -c -g $(EXTFLAGS) ./models/Mesure.cpp
 
-Services.o : Services.cpp
-		g++ -c -g $(EXTFLAGS) Services.cpp
+Services.o : ./models/Services.cpp
+		g++ -c -g $(EXTFLAGS) ./models/Services.cpp
 
-ServiceInit.o : ServiceInit.cpp
-		g++ -c -g $(EXTFLAGS) ServiceInit.cpp
+ServiceInit.o : ./controller/ServiceInit.cpp
+		g++ -c -g $(EXTFLAGS) ./controller/ServiceInit.cpp
 
-Capteur.o : Capteur.cpp
-		g++ -c -g $(EXTFLAGS) Capteur.cpp
+Capteur.o : ./models/Capteur.cpp
+		g++ -c -g $(EXTFLAGS) ./models/Capteur.cpp
 
-main.o : main.cpp
-		g++ -c -g $(EXTFLAGS) main.cpp
+main.o : ./controller/main.cpp
+		g++ -c -g $(EXTFLAGS) ./controller/main.cpp
 
-Test.o : Test.cpp
-		g++ -c -g $(EXTFLAGS) Test.cpp
+Test.o : ./tests/Test.cpp
+		g++ -c -g $(EXTFLAGS) ./tests/Test.cpp

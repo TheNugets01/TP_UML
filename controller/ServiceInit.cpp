@@ -20,9 +20,9 @@ void ServiceInit::init(){
     fstream sourceMesures;
     fstream sourceAtt;
     
-    source.open("sensors.csv");
-    sourceMesures.open("measurements.csv");
-    sourceAtt.open("attributes.csv");
+    source.open("../data/sensors.csv");
+    sourceMesures.open("../data/measurements.csv");
+    sourceAtt.open("../data/attributes.csv");
 
     vector<Capteur> capteurs;
     initCapteurs(capteurs,source);

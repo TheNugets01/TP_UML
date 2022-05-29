@@ -8,8 +8,8 @@
 #include <vector>
 
 #include "ServiceInit.h"
-#include "Utilisateur.h"
-#include "Test.h"
+#include "../models/Utilisateur.h"
+#include "../tests/Test.h"
 
 #define TAILLEBUFFER 100
 #define VIDEBUFFERCLAVIER()                       \
