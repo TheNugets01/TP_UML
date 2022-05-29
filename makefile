@@ -32,8 +32,8 @@ ServiceInit.o : ./controller/ServiceInit.cpp
 Capteur.o : ./models/Capteur.cpp
 		g++ -c -g $(EXTFLAGS) ./models/Capteur.cpp
 
-main.o : ./controller/main.cpp
-		g++ -c -g $(EXTFLAGS) ./controller/main.cpp
+main.o : ./view/main.cpp
+		g++ -c -g $(EXTFLAGS) ./view/main.cpp
 
 Test.o : ./tests/Test.cpp
 		g++ -c -g $(EXTFLAGS) ./tests/Test.cpp
