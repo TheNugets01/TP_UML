@@ -31,15 +31,15 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
     int nbCapteurs=0;
     double moyenne=0.0;
     
-    fstream cap;
-    fstream source;
-    cap.open("sensors.csv");
-    source.open("measurements.csv");
-    vector<Capteur> capteurs=initCapteurs(cap);
+    // fstream cap;
+    // fstream source;
+    // cap.open("sensors.csv");
+    // source.open("measurements.csv");
+    // vector<Capteur> capteurs=initCapteurs(cap);
 
-    initMesure(source,capteurs);
+    // initMesure(source,capteurs);
 
-    for (auto capteur : capteurs)
+    for (Capteur capteur : capteurs)
     {
         if(capteur.getPosition().estDansLaZone(p,rayon))
         {
@@ -48,7 +48,6 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
         }
     }
     moyenne= moyenne/(nbCapteurs);
-    source.close();
     return moyenne;
 }
 
@@ -68,9 +67,6 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, t
 }
 
 //lister les capteurs non fiables detectés entre deux dates 
-//l'identification des capteurs non fiables parmi tous les capteurs disponibles prend un
-//temps considérable étant donné qu'on doit calculer l'indice atmo pour chaque capteur
-//ainsi que la qualité moyenne de la zone
 vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t dateFin)
 {
     vector<Capteur> liste_non_fiables;
@@ -78,16 +74,9 @@ vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t 
     double moyenne=0;
     double moyenneZone=0;
 
-    fstream source;
-    fstream mesures;
-    source.open("sensors.csv");
-    mesures.open("measurements.csv");
-
-    vector<Capteur> listeCapteurs=initCapteurs(source);//RECUPERER LES LISTES DE CAPTEURS INITIALISEE  PARTIR DU CSV
-    initMesure(mesures,listeCapteurs);
 
     //bool pushed;
-    for (auto capteur:listeCapteurs)
+    for (Capteur capteur:capteurs)
     {
         //pushed = false;
         //cout<<"on a un capteur"<<endl;
@@ -115,122 +104,17 @@ vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t 
         }
         //if(!pushed)cout<<"unpushed"<<endl;
     }
-    source.close();
-    mesures.close();
+    
     return liste_non_fiables;
 }
 
-vector<Capteur> Services::initCapteurs(istream& str)
-{
-    
-    vector<Capteur> capteurs;
-    string ligne;
-    string sensorID;
-    string lat;
-    string lng;
-    
-    while( getline(str,ligne) )
-    {
-        istringstream iss{ligne};
-        getline(iss,sensorID,';');
-        getline(iss,lat,';');
-        getline(iss,lng,';');
-        double latitude = stod(lat);
-        double longitude = stod(lng);
-        Position pos = Position(latitude,longitude);
-        Capteur capteur(sensorID,pos);
-        capteurs.push_back(capteur);
-    }
-    return capteurs;
-}
-
-vector<Attribut> Services::initAttribut(istream& str){
-    vector<Attribut> attributs;
-    string ligne;
-    string attributID;
-    string unite;
-    string description;
-
-    getline(str,ligne); // Ignorer la première ligne du fichier
-
-     while( getline(str,ligne) )
-    {
-        istringstream iss{ligne};
-        getline(iss,attributID,';');
-        getline(iss,unite,';');
-        getline(iss,description,';');
-
-        Attribut attribut(attributID,unite,description);
-        attributs.push_back(attribut);
-    }
-    
-    return attributs;
-}
-
-void Services::initMesure(istream& str, vector<Capteur>& capteurs )
-{
-    fstream sourceAtt;
-    sourceAtt.open("attributes.csv");
-    vector<Attribut> attributs = initAttribut(sourceAtt);
-
-    string ligne;
-    string sTemps;
-    string sensorID;
-    string attributID;
-    string sValeur;
-
-    int itr=0;
-
-    while( getline(str,ligne) && itr<10000000)
-    {
-        itr++;
-
-        istringstream iss{ligne};
-
-        getline(iss,sTemps,';'); //Date de la mesure
-        tm* tf = new tm();
-        tf->tm_year = stoi(sTemps.substr(0,4)) - 1900;
-        tf->tm_mon = stoi(sTemps.substr(5,2)) - 1;
-        tf->tm_mday = stoi(sTemps.substr(8,2));
-        time_t temps = mktime(tf);
-
-        getline(iss,sensorID,';'); //Sensor ID
-
-        getline(iss,attributID,';'); //Attribut
-        Attribut attribut;
-        for(int i = 0; i<attributs.size() ;++i){
-            if( attributID.compare(attributs[i].getID()) == 0 ){
-                attribut = attributs[i];
-            }
-        }
-
-        getline(iss,sValeur,';');//Valeur
-        double valeur = stod(sValeur);
-        
-        const Capteur temp(sensorID, Position(0.0, 0.0));
-        vector<Capteur>::iterator it = find(capteurs.begin(), capteurs.end(), temp);
-
-		if (it != capteurs.end())
-		{
-			it->ajouterMesure(Mesure(temps , sensorID , attribut , valeur));
-		}
-    }    
-}
 
 bool c(pair<double,Position> a, pair<double,Position> b) {
 	return a.first < b.first;
 }
 vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef, time_t debut, time_t fin)
 {
-	fstream source;
-    fstream mesures;
-    source.open("sensors.csv");
-    mesures.open("measurements.csv");
-
-    vector<Capteur> capteurs=initCapteurs(source);
-    initMesure(mesures,capteurs);
-
-
+	
     vector<pair<double,Position>> positions;
 
 	if ((fin != 0 && difftime(fin, debut) < 0.f))
@@ -250,4 +134,9 @@ vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef,
 	//trier la liste par la difference de mesure
 	std::sort(positions.begin(), positions.end(), c);
 	return positions;
+}
+
+void Services::setCapteurs(vector<Capteur> c)
+{
+	capteurs = c;
 }

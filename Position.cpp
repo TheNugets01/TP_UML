@@ -7,7 +7,10 @@ Position::Position (double lat, double lon)
     longitude = lon;
 } 
 
-
+Position::Position ()
+{
+    
+} 
 Position::~Position ( )
 {
 

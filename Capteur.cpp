@@ -1,11 +1,11 @@
 #include <iostream>
+#include "Capteur.h"
+
 using namespace std;
 
 #define DAY 86400
 
-#include "Capteur.h"
-
-
+Capteur::Capteur(){}
 Capteur::Capteur (string ID, Position pos):sensorID(ID),position(pos)
 {} 
 

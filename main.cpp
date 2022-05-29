@@ -7,15 +7,19 @@
 #include <string>
 #include <vector>
 
+#include "ServiceInit.h"
 #include "Utilisateur.h"
-#include "Capteur.h"
-#include "Services.h"
 #include "Test.h"
 
 #define TAILLEBUFFER 100
-#define VIDEBUFFERCLAVIER() char ch; while( (ch = getchar() != '\n') && ch != EOF );
+#define VIDEBUFFERCLAVIER()                       \
+    char ch;                                      \
+    while ((ch = getchar() != '\n') && ch != EOF) \
+        ;
 
 using namespace std;
+
+
 
 void AfficherMenu()
 {
@@ -27,42 +31,45 @@ void AfficherMenu()
     cout << "q : Quitter" << endl;
 }
 
-char * Saisi( )
+char *Saisi()
 // Algorithme : Permet de saisir une chaine de caractère au clavier et de la ranger dans une zone alloué dynamiquement
 {
     char unMot[TAILLEBUFFER];
     cin >> unMot;
 
-    char * leMot = new char[strlen(unMot)+1];
-    strcpy( leMot , unMot );
-    
-    if(strcmp(leMot,"-1") != 0)
+    char *leMot = new char[strlen(unMot) + 1];
+    strcpy(leMot, unMot);
+
+    if (strcmp(leMot, "-1") != 0)
     {
         VIDEBUFFERCLAVIER();
     }
-    
+
     return leMot;
 } //----- Fin de Saisi
 
 int main()
 {
-    
-    Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0)));
+
+    ServiceInit controleur;
+    controleur.init();
+
+
+    Capteur *capteur = new Capteur("Sensor0", *(new Position(44.0, -1.0)));
     string sdate2 = "2019-01-01";
     time_t date2;
-    tm* tf = new tm();
-    tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
-    tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
-    tf->tm_mday = stoi(sdate2.substr(8,2));
+    tm *tf = new tm();
+    tf->tm_year = stoi(sdate2.substr(0, 4)) - 1900;
+    tf->tm_mon = stoi(sdate2.substr(5, 2)) - 1;
+    tf->tm_mday = stoi(sdate2.substr(8, 2));
     date2 = mktime(tf);
-    
 
     string sdate3 = "2019-01-05";
     time_t date3;
-    tm* tf1 = new tm();
-    tf1->tm_year = stoi(sdate3.substr(0,4)) - 1900;
-    tf1->tm_mon = stoi(sdate3.substr(5,2)) - 1;
-    tf1->tm_mday = stoi(sdate3.substr(8,2));
+    tm *tf1 = new tm();
+    tf1->tm_year = stoi(sdate3.substr(0, 4)) - 1900;
+    tf1->tm_mon = stoi(sdate3.substr(5, 2)) - 1;
+    tf1->tm_mday = stoi(sdate3.substr(8, 2));
     date3 = mktime(tf1);
 
     /*
@@ -84,14 +91,14 @@ int main()
     //cout << capteur->getATMO(date2) << endl;
     */
 
-    Position* p1= new Position(44.0, -1.0);
-    Services* service = new Services();
-    //double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
-    //double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
-    //cout<<"Moyenne finale : "<<moyenne<<endl;
-    //cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
+    Position *p1 = new Position(44.0, -1.0);
+    Services *service = new Services();
+    // double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
+    // double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
+    // cout<<"Moyenne finale : "<<moyenne<<endl;
+    // cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
 
-    Test* t= new Test();
+    Test *t = new Test();
     t->runTests();
 
     /*
@@ -176,7 +183,7 @@ int main()
 
             //capteurs = identifierCapteursNonFiables(date,date2);
             cout << "Voila la liste des capteurs non fiables : " << endl;
-            for (size_t i = 0; i < capteurs.size(); ++i) 
+            for (size_t i = 0; i < capteurs.size(); ++i)
             {
                 cout << capteurs[i].getID() << "; ";
             }

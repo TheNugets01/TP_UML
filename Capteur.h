@@ -12,7 +12,7 @@ class Capteur
 public:
 
     Position getPosition();
-    
+    Capteur();
     Capteur (string ID, Position pos);
     virtual ~Capteur ( );
     int getATMO(time_t date);
