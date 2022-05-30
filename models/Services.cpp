@@ -127,16 +127,21 @@ vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef,
 
 	for (Capteur cpt : capteurs) 
 	{
-		currentValue = cpt.getMoyATMO(debut, fin); //get caracteristic value of Sensor i
+		currentValue = cpt.getMoyATMO(debut, fin); //get valeur capteur
 		diff = abs(reference - currentValue);
 		positions.push_back(std::make_pair(diff, cpt.getPosition()));
 	}
 	//trier la liste par la difference de mesure
 	std::sort(positions.begin(), positions.end(), c);
-	return positions;
+	return positions.;
 }
 
 void Services::setCapteurs(vector<Capteur> c)
 {
 	capteurs = c;
+}
+
+vector<Capteur> Services::getCapteurs()
+{
+    return capteurs;
 }

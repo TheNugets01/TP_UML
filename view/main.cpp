@@ -53,7 +53,7 @@ int main()
 
     ServiceInit controleur;
     controleur.init();
-
+    cout<< "Taille mmap" <<controleur.getServices().getCapteurs().size() << endl;
 
     Capteur *capteur = new Capteur("Sensor0", *(new Position(44.0, -1.0)));
     string sdate2 = "2019-01-01";
@@ -72,7 +72,7 @@ int main()
     tf1->tm_mday = stoi(sdate3.substr(8, 2));
     date3 = mktime(tf1);
 
-    /*
+    
     Attribut *at1 = new Attribut("O3","µg/m3","concentration d'ozone");
     Attribut *at2 = new Attribut("SO2","µg/m3","concentration de dioxyde de soufre");
     Attribut *at3 = new Attribut("NO2","µg/m3","concentration de dioxyde d'azote");
@@ -89,19 +89,19 @@ int main()
     capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at4,41.75)));
 
     //cout << capteur->getATMO(date2) << endl;
-    */
+    
 
     Position *p1 = new Position(44.0, -1.0);
-    Services *service = new Services();
-    // double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
-    // double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
-    // cout<<"Moyenne finale : "<<moyenne<<endl;
-    // cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
+    Services *service1 = new Services();
+    double moyenne=service1->moyenneQualiteAir(*p1,2.5,date3);
+    double moyennePeriode =service1->moyenneQualiteAir(*p1,2.5,date2,date3);
+    cout<<"Moyenne finale : "<<moyenne<<endl;
+    cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
 
     Test *t = new Test();
     t->runTests();
 
-    /*
+    
     Services *service = new Services();
     AfficherMenu();
     char lecture;
@@ -181,7 +181,7 @@ int main()
             tf->tm_mday = stoi(sdate2.substr(8,2));
             date2 = mktime(tf);
 
-            //capteurs = identifierCapteursNonFiables(date,date2);
+            capteurs = service->identifierCapteursNonFiables(date,date2);
             cout << "Voila la liste des capteurs non fiables : " << endl;
             for (size_t i = 0; i < capteurs.size(); ++i)
             {
@@ -197,5 +197,5 @@ int main()
         AfficherMenu();
         cin >> lecture;
     }
-    return 0;*/
+    return 0;
 }

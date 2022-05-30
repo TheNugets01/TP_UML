@@ -19,7 +19,7 @@ void ServiceInit::init(){
     fstream source;
     fstream sourceMesures;
     fstream sourceAtt;
-    
+    cout<<"init......"<<endl;
     source.open("../data/sensors.csv");
     sourceMesures.open("../data/measurements.csv");
     sourceAtt.open("../data/attributes.csv");
