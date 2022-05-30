@@ -79,7 +79,7 @@ int Capteur::getATMO(time_t date)
 
     if (itmap == mesures.end())
 	{
-        cerr << "Pas de mesures pour cette date" << endl;
+        //cerr << "Pas de mesures pour cette date" << endl;
 		return 0;
 	}
     else

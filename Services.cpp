@@ -66,11 +66,91 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, t
     return moyenne;
 }
 
-/*
-vector<Capteur> Services::identifierCapteursNonFiables()
+//lister les capteurs non fiables detectés entre deux dates 
+vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t dateFin)
 {
+    fstream cap;
+    fstream source;
+    cap.open("sensors.csv");
+    source.open("measurements.csv");
+    vector<Capteur> capteurs=initCapteur(cap);
+
+    initMesure(source,capteurs);
+
+    vector<Capteur> liste_non_fiables;
+    const double rayon = 2.5;
+    double moyenne=0.0;
+    double moyenneZone=0.0;
+
+    //cout<<capteurs.size()<<endl;
+
+    //bool pushed;
+    for (auto capteur:capteurs)
+    {
+        //pushed = false;
+        //cout<<"on a un capteur"<<endl;
+        moyenne = capteur.getMoyATMO(dateDebut, dateFin);
+        //cout<<"atmo: "<<moyenne<<endl;
+        moyenneZone = moyenneQualiteAir(capteur.getPosition(),rayon,dateDebut, dateFin);
+        //cout<<"zone: "<<moyenneZone<<endl;
+        if(moyenne<0.5*moyenneZone || moyenne>2*moyenne){
+            //cout<<"pushed"<<endl;
+            liste_non_fiables.push_back(capteur);
+            //pushed = true;
+        }
+        else{
+            for (time_t day = dateDebut; day <= dateFin; day += DAY){
+                if(capteur.getATMO(day)<0.5*moyenne||capteur.getATMO(day)>2*moyenne){
+                   // cout<<"pushed"<<endl;
+                    //pushed = true;
+                    liste_non_fiables.push_back(capteur);
+                    break;
+                }
+                
+            }
+            
+            
+        }
+        //if(!pushed)cout<<"unpushed"<<endl;
+    }
     
-}*/
+    return liste_non_fiables;
+}
+
+
+bool c(pair<double,Position> a, pair<double,Position> b) {
+	return a.first < b.first;
+}
+vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef, time_t debut, time_t fin)
+{
+    fstream cap;
+    fstream source;
+    cap.open("sensors.csv");
+    source.open("measurements.csv");
+    vector<Capteur> capteurs=initCapteur(cap);
+
+    initMesure(source,capteurs);
+	
+    vector<pair<double,Position>> positions;
+
+	if ((fin != 0 && difftime(fin, debut) < 0.f))
+	{
+		return positions;
+	}
+
+	double reference = capteurRef.getMoyATMO(debut, fin);
+	double currentValue, diff;
+
+	for (Capteur cpt : capteurs) 
+	{
+		currentValue = cpt.getMoyATMO(debut, fin); //get caracteristic value of Sensor i
+		diff = abs(reference - currentValue);
+		positions.push_back(std::make_pair(diff, cpt.getPosition()));
+	}
+	//trier la liste par la difference de mesure
+	std::sort(positions.begin(), positions.end(), c);
+	return positions;
+}
 
 vector<Capteur> Services::initCapteur(istream& str )
 {

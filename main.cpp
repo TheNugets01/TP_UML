@@ -24,6 +24,7 @@ void AfficherMenu()
     cout << "Veuillez choisir parmis les suivantes :" << endl;
     cout << "1 : Calcul de la moyenne de qualité de l'air dans une zone donnee" << endl;
     cout << "2 : Verifier le bon fonctionnement des capteurs" << endl;
+    cout << "3 : Trouver les zones produisant des données similaires"<<endl;
     cout << "q : Quitter" << endl;
 }
 
@@ -46,7 +47,8 @@ char * Saisi( )
 
 int main()
 {
-    
+
+    /*
     Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0)));
     string sdate2 = "2019-01-01";
     time_t date2;
@@ -65,7 +67,7 @@ int main()
     tf1->tm_mday = stoi(sdate3.substr(8,2));
     date3 = mktime(tf1);
 
-    /*
+    
     Attribut *at1 = new Attribut("O3","µg/m3","concentration d'ozone");
     Attribut *at2 = new Attribut("SO2","µg/m3","concentration de dioxyde de soufre");
     Attribut *at3 = new Attribut("NO2","µg/m3","concentration de dioxyde d'azote");
@@ -82,23 +84,24 @@ int main()
     capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at4,41.75)));
 
     //cout << capteur->getATMO(date2) << endl;
-    */
+    
 
     Position* p1= new Position(44.0, -1.0);
     Services* service = new Services();
-    //double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
-    //double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
-    //cout<<"Moyenne finale : "<<moyenne<<endl;
-    //cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
+    double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
+    double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
+    cout<<"Moyenne finale : "<<moyenne<<endl;
+    cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
 
     Test* t= new Test();
-    t->runTests();
+    t->runTests(); */
 
-    /*
+    
     Services *service = new Services();
     AfficherMenu();
     char lecture;
     cin >> lecture;
+    Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0))); 
     while (lecture != 'q')
     {
         if (lecture== '1')
@@ -148,7 +151,7 @@ int main()
                 tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
                 tf->tm_mday = stoi(sdate2.substr(8,2));
                 date2 = mktime(tf);
-                //resultat = service->moyenneQualiteAir(*(new Position(latitude,longitude)),rayon,date,date2);
+                resultat = service->moyenneQualiteAir(*(new Position(latitude,longitude)),rayon,date,date2);
             }
             cout << "La moyenne de qualite de l'air pour votre zone est la suivante : " << resultat << endl;
         }
@@ -174,11 +177,47 @@ int main()
             tf->tm_mday = stoi(sdate2.substr(8,2));
             date2 = mktime(tf);
 
-            //capteurs = identifierCapteursNonFiables(date,date2);
+            capteurs = service->identifierCapteursNonFiables(date,date2);
             cout << "Voila la liste des capteurs non fiables : " << endl;
             for (size_t i = 0; i < capteurs.size(); ++i) 
             {
                 cout << capteurs[i].getID() << "; ";
+            }
+        }
+        else if (lecture== '3')
+        {
+            string sdate;
+            time_t date;
+            cout << "Quelle est la date de debut (YYYY-MM-DD) ?" << endl;
+            cin >> sdate;
+            tm* tf = new tm();
+            tf->tm_year = stoi(sdate.substr(0,4)) - 1900;
+            tf->tm_mon = stoi(sdate.substr(5,2)) - 1;
+            tf->tm_mday = stoi(sdate.substr(8,2));
+            date = mktime(tf);
+
+            string sdate2;
+            time_t date2;
+            cout << "Quelle est la date de fin (YYYY-MM-DD) ?" << endl;
+            cin >> sdate2;
+            tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
+            tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
+            tf->tm_mday = stoi(sdate2.substr(8,2));
+            date2 = mktime(tf);
+
+            vector<pair<double, Position>> zones = service->zoneMemeQualiteAir(*capteur,date,date2);
+            double atmo0= capteur->getMoyATMO(date, date2);
+            cout << "Voila la liste des positions des capteurs similaires au capteur Sensor0  d'indice atmo moyen: " << endl;
+            cout<<endl;
+            int i=0;
+            for (auto it : zones) 
+            {
+                if(i==10)
+                {
+                    break;
+                }
+                cout <<"Ecart observé : "<< it.first << " Coordonnées du capteur : ("<<it.second.latitude <<", "<<it.second.longitude<<")"<<endl;
+                i++;
             }
         }
         else
@@ -190,5 +229,5 @@ int main()
         AfficherMenu();
         cin >> lecture;
     }
-    return 0;*/
+    return 0;
 }
