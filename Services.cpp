@@ -4,6 +4,7 @@ using namespace std;
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 #include <fstream>
 using std::fstream;
@@ -48,6 +49,12 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
     }
     moyenne= moyenne/(nbCapteurs);
     source.close();
+    if(isnan(moyenne))
+    {
+        cerr<<"-!!!!!!!!!-Moyenne incalculable, pas de mesures pour la zone ou la date choisie-!!!!!!!!!-"<<endl;
+        cout<<endl;
+        return 0;
+    }
     return moyenne;
 }
 
@@ -121,7 +128,7 @@ vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t 
 bool c(pair<double,Position> a, pair<double,Position> b) {
 	return a.first < b.first;
 }
-vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef, time_t debut, time_t fin)
+vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur capteurRef, time_t debut, time_t fin)
 {
     fstream cap;
     fstream source;
@@ -150,6 +157,35 @@ vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef,
 	//trier la liste par la difference de mesure
 	std::sort(positions.begin(), positions.end(), c);
 	return positions;
+}
+
+void Services::afficherCapteurs()
+{
+    fstream cap;
+    cap.open("sensors.csv");
+    vector<Capteur> capteurs=initCapteur(cap);
+
+    for (auto capteur : capteurs)
+    {
+        cout<<capteur.getID()<<" : ("<<capteur.getPosition().longitude<<","<<capteur.getPosition().latitude<<")"<<endl;
+    }
+
+}
+
+Capteur Services::getCapteurByID(string ID)
+{
+    fstream cap;
+    cap.open("sensors.csv");
+    vector<Capteur> capteurs=initCapteur(cap);
+    Capteur* capteur =new Capteur("Capteur inexistant", *(new Position(44,0)));
+    for (auto cpt: capteurs)
+    {
+        if(cpt.getID()==ID)
+        {
+            return cpt;
+        }
+    }
+    return *capteur;
 }
 
 vector<Capteur> Services::initCapteur(istream& str )

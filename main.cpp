@@ -19,12 +19,16 @@ using namespace std;
 
 void AfficherMenu()
 {
+    cout<<endl;
+    cout << "=============================== AIR WATCHER ==============================="<<endl;
     cout << "Bonjour et bienvenue dans l'application AirWatcher" << endl;
-    cout << "Ceci est une version Beta, nous vous proposons donc uniquement deux fonctionalites" << endl;
-    cout << "Veuillez choisir parmis les suivantes :" << endl;
+    cout << "Ceci est une version Beta, nous vous proposons donc pas toutes les fonctionalites" << endl;
+    cout << "Veuillez choisir parmis les suivantes :" << endl <<endl;;
     cout << "1 : Calcul de la moyenne de qualité de l'air dans une zone donnee" << endl;
     cout << "2 : Verifier le bon fonctionnement des capteurs" << endl;
     cout << "3 : Trouver les zones produisant des données similaires"<<endl;
+    cout << "4 : Afficher la liste de tous les capteurs" << endl;
+    cout << "5 : Executer les tests unitaires "<<endl;
     cout << "q : Quitter" << endl;
 }
 
@@ -46,62 +50,11 @@ char * Saisi( )
 } //----- Fin de Saisi
 
 int main()
-{
-
-    /*
-    Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0)));
-    string sdate2 = "2019-01-01";
-    time_t date2;
-    tm* tf = new tm();
-    tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
-    tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
-    tf->tm_mday = stoi(sdate2.substr(8,2));
-    date2 = mktime(tf);
-    
-
-    string sdate3 = "2019-01-05";
-    time_t date3;
-    tm* tf1 = new tm();
-    tf1->tm_year = stoi(sdate3.substr(0,4)) - 1900;
-    tf1->tm_mon = stoi(sdate3.substr(5,2)) - 1;
-    tf1->tm_mday = stoi(sdate3.substr(8,2));
-    date3 = mktime(tf1);
-
-    
-    Attribut *at1 = new Attribut("O3","µg/m3","concentration d'ozone");
-    Attribut *at2 = new Attribut("SO2","µg/m3","concentration de dioxyde de soufre");
-    Attribut *at3 = new Attribut("NO2","µg/m3","concentration de dioxyde d'azote");
-    Attribut *at4 = new Attribut("PM10","g/m3","concentration de particules fines");
-
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at1,50.25)));
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at2,74.5)));
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at3,41.5)));
-    capteur->ajouterMesure(*(new Mesure(date2,"Sensor0",*at4,44.75)));
-
-     capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at1,53.25)));
-    capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at2,76.5)));
-    capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at3,48.5)));
-    capteur->ajouterMesure(*(new Mesure(date3,"Sensor0",*at4,41.75)));
-
-    //cout << capteur->getATMO(date2) << endl;
-    
-
-    Position* p1= new Position(44.0, -1.0);
-    Services* service = new Services();
-    double moyenne=service->moyenneQualiteAir(*p1,2.5,date3);
-    double moyennePeriode =service->moyenneQualiteAir(*p1,2.5,date2,date3);
-    cout<<"Moyenne finale : "<<moyenne<<endl;
-    cout<<"Moyenne sur la période : "<<moyennePeriode<<endl;
-
-    Test* t= new Test();
-    t->runTests(); */
-
-    
+{   
     Services *service = new Services();
     AfficherMenu();
     char lecture;
     cin >> lecture;
-    Capteur *capteur = new Capteur("Sensor0",*(new Position(44.0,-1.0))); 
     while (lecture != 'q')
     {
         if (lecture== '1')
@@ -110,12 +63,54 @@ int main()
             double latitude =0.0, longitude=0.0, rayon=0.0;
             VIDEBUFFERCLAVIER();
             cout << "Quelle est la zone qui vous interesse ?" << endl;
-            cout << "Latitude ?" << endl << ">> ";
-            cin >> latitude;
+            while(1)
+            {
+                cout << "Latitude ?" << endl << ">> ";
+                if(cin >> latitude)
+                {
+                    break;
+                }
+                else
+                {
+                    cout<<"-----Veuillez rentrer une latitude valide------"<<endl;
+                    cout<<endl;
+                    cin.clear();
+                    while (cin.get() != '\n') ; // empty loop
+                }
+            }
+
+            while(1)
+            {
             cout << "Longitude ?" << endl << ">> ";
-            cin >> longitude;
+                if(cin >> longitude)
+                {
+                    break;
+                }
+                else
+                {
+                    cout<<"-----Veuillez rentrer une longitude valide------"<<endl;
+                    cout<<endl;
+                    cin.clear();
+                    while (cin.get() != '\n') ; // empty loop
+                }
+            }
+
+            while(1)
+            {
             cout << "Rayon ?" << endl << ">> ";
-            cin >> rayon;
+                if(cin >> rayon)
+                {
+                    break;
+                }
+                else
+                {
+                    cout<<"-----Veuillez rentrer un rayon valide------"<<endl;
+                    cout<<endl;
+                    cin.clear();
+                    while (cin.get() != '\n') ; // empty loop
+                }
+            }
+
             cout << "Choisissez : " << endl;
             cout << "1 : Pour une date precise" << endl;
             cout << "2 : Pour une periode" << endl;
@@ -153,7 +148,10 @@ int main()
                 date2 = mktime(tf);
                 resultat = service->moyenneQualiteAir(*(new Position(latitude,longitude)),rayon,date,date2);
             }
-            cout << "La moyenne de qualite de l'air pour votre zone est la suivante : " << resultat << endl;
+            if(resultat!=0)
+            {
+                cout << "La moyenne de qualite de l'air pour votre zone est la suivante : " << resultat << endl;
+            }
         }
         else if (lecture== '2')
         {
@@ -178,7 +176,7 @@ int main()
             date2 = mktime(tf);
 
             capteurs = service->identifierCapteursNonFiables(date,date2);
-            cout << "Voila la liste des capteurs non fiables : " << endl;
+            cout << "Voici la liste des capteurs non fiables : " << endl;
             for (size_t i = 0; i < capteurs.size(); ++i) 
             {
                 cout << capteurs[i].getID() << "; ";
@@ -186,6 +184,26 @@ int main()
         }
         else if (lecture== '3')
         {
+            string capteurID;
+            while(1)
+            {
+                
+                cout << "Veuillez entrer l'identifiant du capteur sous-la forme SensorX avec X numéro du capteur " << endl;;
+                cin >> capteurID;
+                capteurID=service->getCapteurByID(capteurID).getID();
+                if(capteurID!="Capteur inexistant")
+                {
+                    break;
+                }
+                else
+                {
+                    cout<<"-----Veuillez rentrer un capteur valide de numéro entre 0 et 99 ------"<<endl;
+                    cout<<endl;
+                    cin.clear();
+                    while (cin.get() != '\n') ; // empty loop
+                }
+            }
+
             string sdate;
             time_t date;
             cout << "Quelle est la date de debut (YYYY-MM-DD) ?" << endl;
@@ -205,9 +223,9 @@ int main()
             tf->tm_mday = stoi(sdate2.substr(8,2));
             date2 = mktime(tf);
 
-            vector<pair<double, Position>> zones = service->zoneMemeQualiteAir(*capteur,date,date2);
-            double atmo0= capteur->getMoyATMO(date, date2);
-            cout << "Voila la liste des positions des capteurs similaires au capteur Sensor0  d'indice atmo moyen: " << endl;
+            vector<pair<double, Position>> zones = service->zoneMemeQualiteAir(service->getCapteurByID(capteurID),date,date2);
+            cout<<endl;
+            cout << "Voici la liste des zones similaires à la zone du capteur choisi " << endl;
             cout<<endl;
             int i=0;
             for (auto it : zones) 
@@ -216,9 +234,18 @@ int main()
                 {
                     break;
                 }
-                cout <<"Ecart observé : "<< it.first << " Coordonnées du capteur : ("<<it.second.latitude <<", "<<it.second.longitude<<")"<<endl;
+                cout <<"Zone "<< i << ": ("<<it.second.latitude <<", "<<it.second.longitude<<")"<<endl;
                 i++;
             }
+        }
+        else if (lecture== '4')
+        {
+            service->afficherCapteurs();
+        }
+        else if (lecture== '5')
+        {
+            Test* test =new Test();
+            test->runTests();
         }
         else
         {
