@@ -133,12 +133,13 @@ vector<pair<double, Position>> Services::zoneMemeQualiteAir(Capteur& capteurRef,
 	}
 	//trier la liste par la difference de mesure
 	std::sort(positions.begin(), positions.end(), c);
-	return positions.;
+	return positions;
 }
 
 void Services::setCapteurs(vector<Capteur> c)
 {
-	capteurs = c;
+	//cout<<c.size();
+    capteurs = c;
 }
 
 vector<Capteur> Services::getCapteurs()

@@ -16,13 +16,15 @@ using std::fstream;
 
 
 void ServiceInit::init(){
-    fstream source;
+    fstream source("./data/sensors.csv");
+    //cout<<(source.is_open()) ;
+
     fstream sourceMesures;
     fstream sourceAtt;
     cout<<"init......"<<endl;
-    source.open("../data/sensors.csv");
-    sourceMesures.open("../data/measurements.csv");
-    sourceAtt.open("../data/attributes.csv");
+    
+    sourceMesures.open("./data/measurements.csv");
+    sourceAtt.open("./data/attributes.csv");
 
     vector<Capteur> capteurs;
     initCapteurs(capteurs,source);
@@ -46,9 +48,10 @@ void ServiceInit::initCapteurs(vector<Capteur>& capteurs,istream& str)
     string sensorID;
     string lat;
     string lng;
-    
+
     while( getline(str,ligne) )
     {
+        cout<<"entrer dans boucle"<<endl;
         istringstream iss{ligne};
         getline(iss,sensorID,';');
         getline(iss,lat,';');
@@ -56,8 +59,8 @@ void ServiceInit::initCapteurs(vector<Capteur>& capteurs,istream& str)
         double latitude = stod(lat);
         double longitude = stod(lng);
         Position pos = Position(latitude,longitude);
-        Capteur capteur(sensorID,pos);
-        capteurs.push_back(capteur);
+        capteurs.emplace_back(sensorID,pos);
+        cout<<"taille dans initcap "<<capteurs.size()<<endl;
     }
 }
 
@@ -72,13 +75,13 @@ void ServiceInit::initAttributes(vector<Attribut>& attributs,istream& str){
 
      while( getline(str,ligne) )
     {
+        cout<<"entrer dans boucleatt"<<endl;
         istringstream iss{ligne};
         getline(iss,attributID,';');
         getline(iss,unite,';');
         getline(iss,description,';');
 
-        Attribut attribut(attributID,unite,description);
-        attributs.push_back(attribut);
+        attributs.emplace_back(attributID, unite, description );
     }
 
 }
@@ -96,6 +99,7 @@ void ServiceInit::initMesures(vector<Capteur>& capteurs, vector<Attribut>& attri
 
     while( getline(str,ligne) && itr<10000000)
     {
+        cout<<"entrer dans bouclemes"<<endl;
         itr++;
 
         istringstream iss{ligne};

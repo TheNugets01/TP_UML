@@ -161,7 +161,7 @@ double Capteur::getMoyATMO(time_t dateDebut, time_t dateFin)
 	return moy;
 }
 
-int Capteur::ajouterMesure(Mesure mesure)
+void Capteur::ajouterMesure(Mesure mesure)
 {
     auto it = mesures.find(mesure.getDate());
 	if (it != mesures.end())
@@ -175,7 +175,6 @@ int Capteur::ajouterMesure(Mesure mesure)
 		l.emplace_back(mesure);
 		mesures.emplace(mesure.getDate(), l);
 	}
-	return 0;
 }
 
 Position Capteur::getPosition()
@@ -199,5 +198,5 @@ void Capteur::setMesures(time_t temps, vector<Mesure> listMesure){
 
 bool operator==(const Capteur& c1, const Capteur& c2)
 {
-	return c1.sensorID== c2.sensorID;
+	return c1.sensorID == c2.sensorID;
 }
