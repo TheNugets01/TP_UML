@@ -1,16 +1,22 @@
 #pragma once
 
-#include "../models/Capteur.h"
-#include "../models/Mesure.h"
+#include "../models/Services.h"
+
 using namespace std;
 
 class Test
 {
 public:
 
+Test();
+Test(Services* service);
 void testEstDansLaZone();
 void testGetAtmo();
+void testZoneMemeQualiteAir();
+void testGetCapteurByID();
+void testMoyenneQualiteAir();
 void runTests();
-Test();
 
+private:
+Services* service;
 };

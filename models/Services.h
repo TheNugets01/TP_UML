@@ -1,4 +1,4 @@
-
+#pragma once
 #include <string>
 #include <vector>
 #include <iostream>
@@ -19,9 +19,13 @@ public:
     double moyenneQualiteAir(Position p, double rayon, time_t jour);
     
     vector<Capteur> identifierCapteursNonFiables(time_t dateDebut, time_t dateFin);
-    vector<pair<double, Position>> zoneMemeQualiteAir(Capteur& capteurRef, time_t debut, time_t fin);
+    vector<pair<double, Position>> zoneMemeQualiteAir(Capteur capteurRef, time_t debut, time_t fin);
     void setCapteurs(vector<Capteur> c);
     vector<Capteur> getCapteurs();
+    void afficherCapteurs();
+    Capteur getCapteurByID(string ID);
+
+
     
     private:
 	vector<Capteur> capteurs;

@@ -21,7 +21,7 @@ void ServiceInit::init(){
 
     fstream sourceMesures;
     fstream sourceAtt;
-    cout<<"init......"<<endl;
+    cout<<"initialisation des données depuis les fichiers csv..."<<endl;
     
     sourceMesures.open("./data/measurements.csv");
     sourceAtt.open("./data/attributes.csv");
@@ -39,6 +39,7 @@ void ServiceInit::init(){
     source.close();
     sourceMesures.close();
     sourceAtt.close();
+    //cout<<"taille control "<<capteurs.size()<<endl;
 }
 
 void ServiceInit::initCapteurs(vector<Capteur>& capteurs,istream& str)
@@ -51,7 +52,7 @@ void ServiceInit::initCapteurs(vector<Capteur>& capteurs,istream& str)
 
     while( getline(str,ligne) )
     {
-        cout<<"entrer dans boucle"<<endl;
+        //cout<<"entrer dans boucle"<<endl;
         istringstream iss{ligne};
         getline(iss,sensorID,';');
         getline(iss,lat,';');
@@ -60,7 +61,7 @@ void ServiceInit::initCapteurs(vector<Capteur>& capteurs,istream& str)
         double longitude = stod(lng);
         Position pos = Position(latitude,longitude);
         capteurs.emplace_back(sensorID,pos);
-        cout<<"taille dans initcap "<<capteurs.size()<<endl;
+        //cout<<"taille dans initcap "<<capteurs.size()<<endl;
     }
 }
 
@@ -75,7 +76,7 @@ void ServiceInit::initAttributes(vector<Attribut>& attributs,istream& str){
 
      while( getline(str,ligne) )
     {
-        cout<<"entrer dans boucleatt"<<endl;
+        //cout<<"entrer dans boucleatt"<<endl;
         istringstream iss{ligne};
         getline(iss,attributID,';');
         getline(iss,unite,';');
@@ -99,7 +100,7 @@ void ServiceInit::initMesures(vector<Capteur>& capteurs, vector<Attribut>& attri
 
     while( getline(str,ligne) && itr<10000000)
     {
-        cout<<"entrer dans bouclemes"<<endl;
+        //cout<<"entrer dans bouclemes"<<endl;
         itr++;
 
         istringstream iss{ligne};
@@ -115,7 +116,7 @@ void ServiceInit::initMesures(vector<Capteur>& capteurs, vector<Attribut>& attri
 
         getline(iss,attributID,';'); //Attribut
         Attribut attribut;
-        for(int i = 0; i<attributs.size() ;++i){
+        for(int i = 0; i<(int)attributs.size() ;++i){
             if( attributID.compare(attributs[i].getID()) == 0 ){
                 attribut = attributs[i];
             }
