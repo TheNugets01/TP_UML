@@ -67,6 +67,13 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, t
         moyenne = moyenne + moyenneQualiteAir(p, rayon, t);
     }
     moyenne = moyenne / nbJours;
+
+    if (isnan(moyenne))
+    {
+        cerr << "-!!!!!!!!!-Moyenne incalculable, pas de mesures pour la zone ou la date choisie-!!!!!!!!!-" << endl;
+        cout << endl;
+        return 0;
+    }
     return moyenne;
 }
 
@@ -83,10 +90,10 @@ vector<Capteur> Services::identifierCapteursNonFiables(time_t dateDebut, time_t 
 
         // cout<<"on a un capteur"<<endl;
         moyenne = capteur.getMoyATMO(dateDebut, dateFin);
-        cout << "atmo: " << moyenne << endl
-             << "\n";
+        //cout << "atmo: " << moyenne << endl
+        //     << "\n";
         moyenneZone = moyenneQualiteAir(capteur.getPosition(), rayon, dateDebut, dateFin);
-        cout << "zone: " << moyenneZone << "\n";
+        //cout << "zone: " << moyenneZone << "\n";
         if (abs(moyenne - moyenneZone) > 1.5)
         {
             // cout<<"pushed"<<endl;
