@@ -18,9 +18,6 @@ Services::Services()
 {
 }
 
-Services::~Services()
-{
-}
 
 double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
 {
@@ -149,7 +146,7 @@ void Services::afficherCapteurs()
 
 Capteur Services::getCapteurByID(string ID)
 {
-    Capteur *capteur = new Capteur("Capteur inexistant", *(new Position(44, 0)));
+    Capteur capteur = Capteur("Capteur inexistant", Position(44, 0));
     for (auto cpt : capteurs)
     {
         if (cpt.getID() == ID)
@@ -157,7 +154,7 @@ Capteur Services::getCapteurByID(string ID)
             return cpt;
         }
     }
-    return *capteur;
+    return capteur;
 }
 
 void Services::setCapteurs(vector<Capteur> c)

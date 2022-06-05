@@ -68,7 +68,7 @@ int main()
     controlleur.init();
 
     // tous les capteurs
-    Services *service = new Services(controlleur.getServices());
+    Services service = controlleur.getServices();
 
     AfficherMenu();
     char lecture;
@@ -145,14 +145,14 @@ int main()
             {
                 cout << "A quelle date doit on calculer la moyenne (YYYY-MM-DD) ?" << endl;
                 cin >> sdate;
-                tm *tf = new tm();
-                tf->tm_year = stoi(sdate.substr(0, 4)) - 1900;
-                tf->tm_mon = stoi(sdate.substr(5, 2)) - 1;
-                tf->tm_mday = stoi(sdate.substr(8, 2));
-                date = mktime(tf);
+                tm tf = tm();
+                tf.tm_year = stoi(sdate.substr(0, 4)) - 1900;
+                tf.tm_mon = stoi(sdate.substr(5, 2)) - 1;
+                tf.tm_mday = stoi(sdate.substr(8, 2));
+                date = mktime(&tf);
                 Timer t;
                 t.Start();
-                resultat = service->moyenneQualiteAir(*(new Position(latitude, longitude)), rayon, date);
+                resultat = service.moyenneQualiteAir(Position(latitude, longitude), rayon, date);
                 double duration = t.GetDuration();
                 DisplayAlgorithmRuntime(duration);
             }
@@ -160,24 +160,24 @@ int main()
             {
                 cout << "Quelle est la date de debut (YYYY-MM-DD) ?" << endl;
                 cin >> sdate;
-                tm *tf = new tm();
-                tf->tm_year = stoi(sdate.substr(0, 4)) - 1900;
-                tf->tm_mon = stoi(sdate.substr(5, 2)) - 1;
-                tf->tm_mday = stoi(sdate.substr(8, 2));
-                date = mktime(tf);
+                tm tf = tm();
+                tf.tm_year = stoi(sdate.substr(0, 4)) - 1900;
+                tf.tm_mon = stoi(sdate.substr(5, 2)) - 1;
+                tf.tm_mday = stoi(sdate.substr(8, 2));
+                date = mktime(&tf);
 
                 string sdate2;
                 time_t date2;
                 cout << "Quelle est la date de fin (YYYY-MM-DD) ?" << endl;
                 cin >> sdate2;
-                tf->tm_year = stoi(sdate2.substr(0, 4)) - 1900;
-                tf->tm_mon = stoi(sdate2.substr(5, 2)) - 1;
-                tf->tm_mday = stoi(sdate2.substr(8, 2));
-                date2 = mktime(tf);
+                tf.tm_year = stoi(sdate2.substr(0, 4)) - 1900;
+                tf.tm_mon = stoi(sdate2.substr(5, 2)) - 1;
+                tf.tm_mday = stoi(sdate2.substr(8, 2));
+                date2 = mktime(&tf);
                 Position pos = Position(latitude, longitude);
                 Timer t;
                 t.Start();
-                resultat = service->moyenneQualiteAir(pos, rayon, date, date2);
+                resultat = service.moyenneQualiteAir(pos, rayon, date, date2);
 
                 double duration = t.GetDuration();
                 DisplayAlgorithmRuntime(duration);
@@ -194,24 +194,24 @@ int main()
             time_t date;
             cout << "Quelle est la date de debut (YYYY-MM-DD) ?" << endl;
             cin >> sdate;
-            tm *tf = new tm();
-            tf->tm_year = stoi(sdate.substr(0, 4)) - 1900;
-            tf->tm_mon = stoi(sdate.substr(5, 2)) - 1;
-            tf->tm_mday = stoi(sdate.substr(8, 2));
-            date = mktime(tf);
+            tm tf = tm();
+            tf.tm_year = stoi(sdate.substr(0, 4)) - 1900;
+            tf.tm_mon = stoi(sdate.substr(5, 2)) - 1;
+            tf.tm_mday = stoi(sdate.substr(8, 2));
+            date = mktime(&tf);
 
             string sdate2;
             time_t date2;
             cout << "Quelle est la date de fin (YYYY-MM-DD) ?" << endl;
             cin >> sdate2;
-            tf->tm_year = stoi(sdate2.substr(0, 4)) - 1900;
-            tf->tm_mon = stoi(sdate2.substr(5, 2)) - 1;
-            tf->tm_mday = stoi(sdate2.substr(8, 2));
-            date2 = mktime(tf);
+            tf.tm_year = stoi(sdate2.substr(0, 4)) - 1900;
+            tf.tm_mon = stoi(sdate2.substr(5, 2)) - 1;
+            tf.tm_mday = stoi(sdate2.substr(8, 2));
+            date2 = mktime(&tf);
 
             Timer t;
             t.Start();
-            capteurs = service->identifierCapteursNonFiables(date, date2);
+            capteurs = service.identifierCapteursNonFiables(date, date2);
             double duration = t.GetDuration();
             DisplayAlgorithmRuntime(duration);
 
@@ -230,7 +230,7 @@ int main()
                 cout << "Veuillez entrer l'identifiant du capteur sous-la forme SensorX avec X numéro du capteur " << endl;
                 ;
                 cin >> capteurID;
-                capteurID = service->getCapteurByID(capteurID).getID();
+                capteurID = service.getCapteurByID(capteurID).getID();
                 if (capteurID != "Capteur inexistant")
                 {
                     break;
@@ -249,24 +249,24 @@ int main()
             time_t date;
             cout << "Quelle est la date de debut (YYYY-MM-DD) ?" << endl;
             cin >> sdate;
-            tm *tf = new tm();
-            tf->tm_year = stoi(sdate.substr(0, 4)) - 1900;
-            tf->tm_mon = stoi(sdate.substr(5, 2)) - 1;
-            tf->tm_mday = stoi(sdate.substr(8, 2));
-            date = mktime(tf);
+            tm tf = tm();
+            tf.tm_year = stoi(sdate.substr(0, 4)) - 1900;
+            tf.tm_mon = stoi(sdate.substr(5, 2)) - 1;
+            tf.tm_mday = stoi(sdate.substr(8, 2));
+            date = mktime(&tf);
 
             string sdate2;
             time_t date2;
             cout << "Quelle est la date de fin (YYYY-MM-DD) ?" << endl;
             cin >> sdate2;
-            tf->tm_year = stoi(sdate2.substr(0, 4)) - 1900;
-            tf->tm_mon = stoi(sdate2.substr(5, 2)) - 1;
-            tf->tm_mday = stoi(sdate2.substr(8, 2));
-            date2 = mktime(tf);
+            tf.tm_year = stoi(sdate2.substr(0, 4)) - 1900;
+            tf.tm_mon = stoi(sdate2.substr(5, 2)) - 1;
+            tf.tm_mday = stoi(sdate2.substr(8, 2));
+            date2 = mktime(&tf);
 
             Timer t;
             t.Start();
-            vector<pair<double, Position>> zones = service->zoneMemeQualiteAir(service->getCapteurByID(capteurID), date, date2);
+            vector<pair<double, Position>> zones = service.zoneMemeQualiteAir(service.getCapteurByID(capteurID), date, date2);
             double duration = t.GetDuration();
             cout << endl;
             cout << "Voici la liste des centres des zones similaires à la zone du capteur choisi " << endl;
@@ -285,12 +285,12 @@ int main()
         }
         else if (lecture == '4')
         {
-            service->afficherCapteurs();
+            service.afficherCapteurs();
         }
         else if (lecture == '5')
         {
-            Test *test = new Test(service);
-            test->runTests();
+            Test test = Test(service);
+            test.runTests();
         }
         else
         {

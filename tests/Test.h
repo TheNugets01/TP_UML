@@ -9,7 +9,7 @@ class Test
 public:
 
 Test();
-Test(Services* service);
+Test(Services service);
 void testEstDansLaZone();
 void testGetAtmo();
 void testZoneMemeQualiteAir();
@@ -18,5 +18,5 @@ void testMoyenneQualiteAir();
 void runTests();
 
 private:
-Services* service;
+Services service;
 };

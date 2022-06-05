@@ -106,11 +106,11 @@ void ServiceInit::initMesures(vector<Capteur>& capteurs, vector<Attribut>& attri
         istringstream iss{ligne};
 
         getline(iss,sTemps,';'); //Date de la mesure
-        tm* tf = new tm();
-        tf->tm_year = stoi(sTemps.substr(0,4)) - 1900;
-        tf->tm_mon = stoi(sTemps.substr(5,2)) - 1;
-        tf->tm_mday = stoi(sTemps.substr(8,2));
-        time_t temps = mktime(tf);
+        tm tf =  tm();
+        tf.tm_year = stoi(sTemps.substr(0,4)) - 1900;
+        tf.tm_mon = stoi(sTemps.substr(5,2)) - 1;
+        tf.tm_mday = stoi(sTemps.substr(8,2));
+        time_t temps = mktime(&tf);
 
         getline(iss,sensorID,';'); //Sensor ID
 
