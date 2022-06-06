@@ -50,7 +50,7 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t jour)
         cout << endl;
         return 0;
     }
-    return moyenne;
+    return round(moyenne);
 }
 
 double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin)
@@ -71,7 +71,7 @@ double Services::moyenneQualiteAir(Position p, double rayon, time_t dateDebut, t
         cout << endl;
         return 0;
     }
-    return moyenne;
+    return round(moyenne);
 }
 
 // lister les capteurs non fiables detectés entre deux dates
