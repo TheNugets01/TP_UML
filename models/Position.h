@@ -10,7 +10,7 @@ class Position
 public:
     
     bool estDansLaZone(Position centre, double rayon) const;
-
+    Position();
     Position (double lat, double lon);
     virtual ~Position ( );
     

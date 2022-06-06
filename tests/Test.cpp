@@ -3,15 +3,17 @@ using namespace std;
 
 #include "Test.h"
 
+
 int CPT=0;
 int ECHEC=0;
 
 
-Test::Test()
+Test::Test(Services service):service(service)
 {} 
 
 void Test::runTests()
 {
+    
     testEstDansLaZone();
     testGetAtmo();
     testZoneMemeQualiteAir();
@@ -60,7 +62,7 @@ void Test::testGetAtmo()
     cout<<6<<endl;
     cout<<endl;
     Position a (44.0,0.0);
-    Capteur c1 ("Sensor1", *(new Position (44.0,-0.3)));
+    Capteur c1 ("Sensor1", Position (44.0,-0.3));
 
     Attribut o3 ("O3","µg/m3","concentration d'ozone");
     Attribut so2 ("SO2","µg/m3","concentration de dioxyde de soufre");
@@ -69,21 +71,21 @@ void Test::testGetAtmo()
 
     string sdate2 = "2019-01-01";
     time_t date2;
-    tm* tf = new tm();
-    tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
-    tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
-    tf->tm_mday = stoi(sdate2.substr(8,2));
-    date2 = mktime(tf);
+    tm tf = tm();
+    tf.tm_year = stoi(sdate2.substr(0,4)) - 1900;
+    tf.tm_mon = stoi(sdate2.substr(5,2)) - 1;
+    tf.tm_mday = stoi(sdate2.substr(8,2));
+    date2 = mktime(&tf);
 
-    Mesure* m1 = new Mesure(date2, "Sensor1",o3,63.05);
-    Mesure* m2 = new Mesure(date2, "Sensor1",so2,34.42);
-    Mesure* m3 = new Mesure(date2, "Sensor1",no2,61.92);
-    Mesure* m4 = new Mesure(date2, "Sensor1",pm10,51.12);
+    Mesure m1 = Mesure(date2, "Sensor1",o3,63.05);
+    Mesure m2 = Mesure(date2, "Sensor1",so2,34.42);
+    Mesure m3 = Mesure(date2, "Sensor1",no2,61.92);
+    Mesure m4 = Mesure(date2, "Sensor1",pm10,51.12);
 
-    c1.ajouterMesure(*m1);
-    c1.ajouterMesure(*m2);
-    c1.ajouterMesure(*m3);
-    c1.ajouterMesure(*m4);
+    c1.ajouterMesure(m1);
+    c1.ajouterMesure(m2);
+    c1.ajouterMesure(m3);
+    c1.ajouterMesure(m4);
 
     cout<<"===== Resultat obtenu :  ====="<<endl;
     cout<<endl;
@@ -103,7 +105,7 @@ void Test::testZoneMemeQualiteAir()
     cout<<endl;
     cout<<"Zone 0: (45.2,45.2)"<<endl<<"Zone 1: (47.6,47.6)"<<endl<<"Zone 2: (46,46)"<<endl<<"Zone 3: (47.2,47.2)"<<endl<<"Zone 4: (44.8,44.8)"<<endl<<"Zone 5: (46.8,46.8)"<<endl<<"Zone 6: (46.8,46.8)"<<endl<<"Zone 7: (44.8,44.8)"<<endl<<"Zone 8: (47.6,47.6)"<<endl<<"Zone 9: (45.2,45.2)"<<endl;
     cout<<endl;
-    Services* service=new Services();
+
     Attribut o3 ("O3","µg/m3","concentration d'ozone");
     Attribut so2 ("SO2","µg/m3","concentration de dioxyde de soufre");
     Attribut no2 ("NO2","µg/m3","concentration de dioxyde d'azote");
@@ -111,50 +113,49 @@ void Test::testZoneMemeQualiteAir()
 
     string sdate2 = "2019-01-01";
     time_t date2;
-    tm* tf = new tm();
-    tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
-    tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
-    tf->tm_mday = stoi(sdate2.substr(8,2));
-    date2 = mktime(tf);
+    tm tf = tm();
+    tf.tm_year = stoi(sdate2.substr(0,4)) - 1900;
+    tf.tm_mon = stoi(sdate2.substr(5,2)) - 1;
+    tf.tm_mday = stoi(sdate2.substr(8,2));
+    date2 = mktime(&tf);
 
-    Capteur c0 ("Sensor0", *(new Position (44.0,-1.0)));
+    Capteur c0 ("Sensor0", Position (44.0,-1.0));
 
-    Mesure* m9 = new Mesure(date2, "Sensor0",o3,100);
-    Mesure* m10 = new Mesure(date2, "Sensor0",so2,200);
-    Mesure* m11 = new Mesure(date2, "Sensor0",no2,300);
-    Mesure* m12 = new Mesure(date2, "Sensor0",pm10,400);
+    Mesure m9 = Mesure(date2, "Sensor0",o3,100);
+    Mesure m10 =Mesure(date2, "Sensor0",so2,200);
+    Mesure m11 = Mesure(date2, "Sensor0",no2,300);
+    Mesure m12 = Mesure(date2, "Sensor0",pm10,400);
 
-    c0.ajouterMesure(*m9);
-    c0.ajouterMesure(*m10);
-    c0.ajouterMesure(*m11);
-    c0.ajouterMesure(*m12);
+    c0.ajouterMesure(m9);
+    c0.ajouterMesure(m10);
+    c0.ajouterMesure(m11);
+    c0.ajouterMesure(m12);
 
 
-    Capteur c1 ("Sensor1", *(new Position (44.0,-0.3)));
+    Capteur c1 ("Sensor1", Position (44.0,-0.3));
 
-    Mesure* m1 = new Mesure(date2, "Sensor1",o3,63.05);
-    Mesure* m2 = new Mesure(date2, "Sensor1",so2,34.42);
-    Mesure* m3 = new Mesure(date2, "Sensor1",no2,61.92);
-    Mesure* m4 = new Mesure(date2, "Sensor1",pm10,51.12);
+    Mesure m1 = Mesure(date2, "Sensor1",o3,63.05);
+    Mesure m2 = Mesure(date2, "Sensor1",so2,34.42);
+    Mesure m3 = Mesure(date2, "Sensor1",no2,61.92);
+    Mesure m4 = Mesure(date2, "Sensor1",pm10,51.12);
 
-    c1.ajouterMesure(*m1);
-    c1.ajouterMesure(*m2);
-    c1.ajouterMesure(*m3);
-    c1.ajouterMesure(*m4);
+    c1.ajouterMesure(m1);
+    c1.ajouterMesure(m2);
+    c1.ajouterMesure(m3);
+    c1.ajouterMesure(m4);
 
-    Capteur c2 ("Sensor2", *(new Position (44.0,0.4)));
+    Capteur c2 ("Sensor2", Position (44.0,0.4));
 
-    Mesure* m5 = new Mesure(date2, "Sensor2",o3,47.84);
-    Mesure* m6 = new Mesure(date2, "Sensor2",so2,43.32);
-    Mesure* m7 = new Mesure(date2, "Sensor2",no2,43.32);
-    Mesure* m8 = new Mesure(date2, "Sensor2",pm10,45.02);
+    Mesure m5 = Mesure(date2, "Sensor2",o3,47.84);
+    Mesure m6 = Mesure(date2, "Sensor2",so2,43.32);
+    Mesure m7 = Mesure(date2, "Sensor2",no2,43.32);
+    Mesure m8 = Mesure(date2, "Sensor2",pm10,45.0);
+    c2.ajouterMesure(m5);
+    c2.ajouterMesure(m6);
+    c2.ajouterMesure(m7);
+    c2.ajouterMesure(m8);
 
-    c2.ajouterMesure(*m5);
-    c2.ajouterMesure(*m6);
-    c2.ajouterMesure(*m7);
-    c2.ajouterMesure(*m8);
-
-    vector<pair<double, Position>> zones = service->zoneMemeQualiteAir(c0,date2,date2);
+    vector<pair<double, Position>> zones = service.zoneMemeQualiteAir(c0,date2,date2);
     int i=0;
     cout<<"===== Resultat obtenu :  ====="<<endl;
     cout<<endl;
@@ -174,7 +175,6 @@ void Test::testZoneMemeQualiteAir()
 
 void Test::testGetCapteurByID()
 {
-    Services* service= new Services();
     cout<<"**************TEST DE getCapteurByID***********"<<endl;
     cout<<endl;
 
@@ -186,8 +186,8 @@ void Test::testGetCapteurByID()
     cout<<"===== Resultat obtenu :  ====="<<endl;
     cout<<endl;
 
-    cout<<service->getCapteurByID("Sensor100").getID()<<endl;
-    cout<<service->getCapteurByID("Sensor0").getID()<<endl;
+    cout<<service.getCapteurByID("Sensor100").getID()<<endl;
+    cout<<service.getCapteurByID("Sensor0").getID()<<endl;
     cout<<endl;
     cout<<">>>>>>>>>>>>>>>>>TEST REUSSI "<<endl<<endl<<endl;
     CPT++;
@@ -195,7 +195,7 @@ void Test::testGetCapteurByID()
 
 void Test::testMoyenneQualiteAir()
 {
-    Services* service= new Services();
+
     cout<<"**************TEST DE moyenneQualiteAir***********"<<endl;
     cout<<endl;
 
@@ -206,24 +206,24 @@ void Test::testMoyenneQualiteAir()
 
     string sdate2 = "2019-01-01";
     time_t date2;
-    tm* tf = new tm();
-    tf->tm_year = stoi(sdate2.substr(0,4)) - 1900;
-    tf->tm_mon = stoi(sdate2.substr(5,2)) - 1;
-    tf->tm_mday = stoi(sdate2.substr(8,2));
-    date2 = mktime(tf);
+    tm tf = tm();
+    tf.tm_year = stoi(sdate2.substr(0,4)) - 1900;
+    tf.tm_mon = stoi(sdate2.substr(5,2)) - 1;
+    tf.tm_mday = stoi(sdate2.substr(8,2));
+    date2 = mktime(&tf);
 
     string sdate1 = "2019-01-03";
     time_t date1;
-    tm* tf1 = new tm();
-    tf1->tm_year = stoi(sdate1.substr(0,4)) - 1900;
-    tf1->tm_mon = stoi(sdate1.substr(5,2)) - 1;
-    tf1->tm_mday = stoi(sdate1.substr(8,2));
-    date1 = mktime(tf);
+    tm tf1 = tm();
+    tf1.tm_year = stoi(sdate1.substr(0,4)) - 1900;
+    tf1.tm_mon = stoi(sdate1.substr(5,2)) - 1;
+    tf1.tm_mday = stoi(sdate1.substr(8,2));
+    date1 = mktime(&tf1);
 
     cout<<"===== Resultat obtenu :  ====="<<endl;
     cout<<endl;
-    cout<<"Qualité de l'air pour le jour 2019-01-01 : "<<service->moyenneQualiteAir(*(new Position (44.0,-1.0)),0.1,date2)<<endl;
-    cout<<"Moyenne de la qualité de l'air pour la période 2019-01-01 à 2019-01-03 : "<<service->moyenneQualiteAir(*(new Position (44.0,-1.0)),0.1,date2, date1)<<endl;
+    cout<<"Qualité de l'air pour le jour 2019-01-01 : "<<service.moyenneQualiteAir(Position (44.0,-1.0),0.1,date2)<<endl;
+    cout<<"Moyenne de la qualité de l'air pour la période 2019-01-01 à 2019-01-03 : "<<service.moyenneQualiteAir(Position (44.0,-1.0),0.1,date2, date1)<<endl;
     cout<<endl;
     cout<<">>>>>>>>>>>>>>>>>TEST REUSSI "<<endl<<endl<<endl;
     CPT++;

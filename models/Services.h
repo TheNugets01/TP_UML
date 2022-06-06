@@ -1,13 +1,11 @@
 #pragma once
-
-using namespace std;
 #include <string>
 #include <vector>
 #include <iostream>
 
+#include "../models/Capteur.h"
 
-#include "Capteur.h"
-#include "Mesure.h"
+using namespace std;
 
 class Services
 {
@@ -16,17 +14,19 @@ public:
     
 
     Services ();
-    virtual ~Services ( );
     double moyenneQualiteAir(Position p, double rayon, time_t dateDebut, time_t dateFin);
     double moyenneQualiteAir(Position p, double rayon, time_t jour);
-    vector<Capteur> initCapteur(istream& str);
-    void initMesure(istream& str, vector<Capteur>& capteurs);
-    vector<Attribut> initAttribut(istream& str);
+    
     vector<Capteur> identifierCapteursNonFiables(time_t dateDebut, time_t dateFin);
     vector<pair<double, Position>> zoneMemeQualiteAir(Capteur capteurRef, time_t debut, time_t fin);
+    void setCapteurs(vector<Capteur> c);
+    vector<Capteur> getCapteurs();
     void afficherCapteurs();
     Capteur getCapteurByID(string ID);
 
 
+    
+    private:
+	vector<Capteur> capteurs;
+    
 };
-
